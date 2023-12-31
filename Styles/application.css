@@ -1,0 +1,157 @@
+/** Main Variables for Body **/
+body {
+	--primary-color: rgb(35, 64, 60);
+	--secondary-color: rgb(126, 142, 142);
+	--third-color: rgb(168, 182, 188);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	background: var(--primary-color) !important;
+}
+
+/** Class for Fomantic-UI **/
+ .ui {
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+     border-radius: 0px !important;
+}
+ .ui.button {
+     text-transform: uppercase;
+}
+ .ui.segment {
+     border: none !important;
+}
+/** Initial Content, Main Content and Image Canvas **/
+ canvas, #content {
+     transition: opacity 0.5s ease-in-out;
+}
+ #content {
+     border: none !important;
+     box-shadow: none !important;
+     overflow: hidden;
+     transition: display 0.5s ease-in-out;
+}
+ #selectEmotionsId, #selectWordsId {
+     display: none;
+}
+/** Backrgound Classes **/
+ .background-color-primary {
+     background: var(--primary-color) !important;
+     color: var(--third-color) !important;
+}
+ .background-color-secondary {
+     background: var(--secondary-color) !important;
+     color: var(--third-color) !important;
+}
+ .background-color-third {
+     background: var(--third-color) !important;
+     color: var(--primary-color) !important;
+}
+/** Classes for Width, Height, Padding, Margin, Text-Align, Font-Style **/
+ .wHundred {
+     width: 100%;
+}
+ .hHundred {
+     height: 100% 
+}
+ .pnone-important {
+     padding: 0 !important;
+}
+ .p-onerem {
+     padding: 1rem !important;
+}
+ .p-oneHalfRem {
+     padding: 1.5rem !important;
+}
+ .p-top-oneRem {
+     padding-top: 1rem !important;
+}
+ .p-side-oneRem {
+     padding: 0 1rem !important;
+}
+ .marginNone {
+     margin: 0 !important;
+}
+ .marginBottomChat {
+     margin-bottom: 4rem !important;
+}
+.marginTop {
+	margin-top: 1rem !important;
+}
+ .tEnd {
+     text-align: end;
+}
+ .tStart {
+     text-align: start;
+}
+ .fontItalic {
+     font-style: Italic;
+}
+/** Classes for Border, Position, Z-Index, Overflow**/
+ .border-secondary-color {
+     border: 1px solid var(--secondary-color);
+}
+ .border-third-color {
+     border: 1px solid var(--third-color) !important;
+}
+ .border-bottom-secondary-color {
+     border-bottom: 1px solid var(--secondary-color);
+}
+ .border-top-secondary-color {
+     border-bottom: 1px solid var(--secondary-color);
+}
+ .pFixed {
+     position: fixed;
+}
+ .bottomZero {
+     bottom: 0 !important;
+}
+ .z-index-high {
+     z-index: 1000;
+}
+ .overflow-y-auto {
+     overflow-y: auto;
+}
+ #imageSlider, .sliderClass {
+     accent-color: var(--third-color) !important;
+}
+ .nextButton:hover, .backButton:hover {
+     background: var(--secondary-color) !important;
+     color: var(--third-color) !important;
+}
+/** CHOOSE WORDS CSS */
+ .cloud-label {
+     min-width: 115px !important;
+     display: inline-block;
+     padding: 5px 10px;
+     margin-right: 10px;
+     margin-bottom: 10px;
+     cursor: pointer;
+     background: var(--third-color) !important;
+     color: var(--primary-color) !important;
+     border-radius: 0 !important;
+     border: 1px solid transparent;
+}
+ .cloud-label.active {
+     background: var(--primary-color) !important;
+     color: var(--third-color) !important;
+     border: 1px solid var(--secondary-color) !important;
+}
+ #feelings-container {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+}
+/** EMOTION WHEEL CSS */
+ text {
+     font-size: 5px;
+     pointer-events: none;
+}
+ text:nth-of-type(5),text:nth-of-type(6){
+     transform:rotate(180);
+}
+ select {
+     border-radius: 0 !important;
+     padding: 5px !important;
+}
+ svg{
+     overflow:visible;
+}
