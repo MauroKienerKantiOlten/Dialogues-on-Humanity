@@ -1,0 +1,2247 @@
+{
+    "name": "Feature Callback-Link - Experience",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 950115,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0,
+                    "name": "Feature Hook"
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Feature Callback-Link - Experience"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "imageKey",
+                        "type": "text"
+                    },
+                    {
+                        "name": "submit",
+                        "type": "text"
+                    },
+                    {
+                        "name": "hazuRedirectUrl",
+                        "type": "text"
+                    },
+                    {
+                        "name": "hazu",
+                        "spec": [
+                            {
+                                "name": "parentId",
+                                "type": "text"
+                            },
+                            {
+                                "name": "userId",
+                                "type": "text"
+                            },
+                            {
+                                "name": "email",
+                                "type": "text"
+                            },
+                            {
+                                "name": "displayName",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 26094
+            },
+            "mapper": {
+                "key": "{{1.imageKey}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0,
+                    "name": "Get Image"
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Images"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Artist",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "data-original-image-url",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "source",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "theme-key",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "HazuId",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Title",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "ICRC",
+                        "type": "boolean",
+                        "label": null,
+                        "default": false,
+                        "required": true
+                    },
+                    {
+                        "name": "Questions",
+                        "spec": [
+                            {
+                                "name": "Question1",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question2",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question3",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            }
+                        ],
+                        "type": "collection",
+                        "label": null,
+                        "required": false
+                    },
+                    {
+                        "name": "NextImageKey",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Website",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Instagram",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "FeatureKey",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 60,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 26094
+            },
+            "mapper": {
+                "key": "{{11.NextImageKey}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0,
+                    "name": "Get next Image"
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Images"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Artist",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "data-original-image-url",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "source",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "theme-key",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "HazuId",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Title",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "ICRC",
+                        "type": "boolean",
+                        "label": null,
+                        "default": false,
+                        "required": true
+                    },
+                    {
+                        "name": "Questions",
+                        "spec": [
+                            {
+                                "name": "Question1",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question2",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question3",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            }
+                        ],
+                        "type": "collection",
+                        "label": null,
+                        "required": false
+                    },
+                    {
+                        "name": "NextImageKey",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Website",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Instagram",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "FeatureKey",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 59,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 26102
+            },
+            "mapper": {
+                "key": "{{11.FeatureKey}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0,
+                    "name": "Get Feature"
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Features"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Description",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 83,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 26093
+            },
+            "mapper": {
+                "key": "{{11.`theme-key`}}",
+                "returnWrapped": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0,
+                    "name": "Get Theme"
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Themes"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    },
+                    {
+                        "name": "returnWrapped",
+                        "type": "boolean",
+                        "label": "Return Wrapped Output",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "HazuId",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "color",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "icon",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "name": "Questions",
+                        "spec": [
+                            {
+                                "name": "Question 1",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question 2",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question 3",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "name": "Question 4",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            }
+                        ],
+                        "type": "collection",
+                        "label": null,
+                        "required": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 102,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 38474
+            },
+            "mapper": {
+                "key": "26cf2e2255fb",
+                "returnWrapped": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0,
+                    "name": "Get Emotions"
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Emotions"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    },
+                    {
+                        "name": "returnWrapped",
+                        "type": "boolean",
+                        "label": "Return Wrapped Output",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Emotions",
+                        "spec": {
+                            "type": "text",
+                            "default": null,
+                            "required": false,
+                            "multiline": false
+                        },
+                        "type": "array",
+                        "label": null,
+                        "required": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 88,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{substring(11.Artist; 0; 4)}}",
+                "casesTable": [
+                    {
+                        "output": "/** Main Variables for Body **/\nbody {\n\t--primary-color: rgb(35, 64, 60);\n\t--secondary-color: rgb(126, 142, 142);\n\t--third-color: rgb(168, 182, 188);\n\tfont-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif !important;\n\tbackground: var(--primary-color) !important;\n}",
+                        "pattern": "ICRC"
+                    }
+                ],
+                "elseOutput": "/** Main Variables for Body **/\nbody {\n\t--primary-color: rgb(168, 182, 188);\n\t--secondary-color: rgb(126, 142, 142);\n\t--third-color: rgb(35, 64, 60);\n\tfont-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif !important;\n\tbackground: var(--primary-color) !important;\n}",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 0,
+                    "name": "Set Colors"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 51,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Standard CSS",
+                "scope": "roundtrip",
+                "value": "{{88.output}}\n/** Class for Fomantic-UI **/\n .ui {\n     font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif !important;\n     border-radius: 0px !important;\n}\n .ui.button {\n     text-transform: uppercase;\n}\n .ui.segment {\n     border: none !important;\n}\n/** Initial Content, Main Content and Image Canvas **/\n canvas, #content {\n     transition: opacity 0.5s ease-in-out;\n}\n #content {\n     border: none !important;\n     box-shadow: none !important;\n     overflow: hidden;\n     transition: display 0.5s ease-in-out;\n}\n #selectEmotionsId, #selectWordsId {\n     display: none;\n}\n/** Backrgound Classes **/\n .background-color-primary {\n     background: var(--primary-color) !important;\n     color: var(--third-color) !important;\n}\n .background-color-secondary {\n     background: var(--secondary-color) !important;\n     color: var(--third-color) !important;\n}\n .background-color-third {\n     background: var(--third-color) !important;\n     color: var(--primary-color) !important;\n}\n/** Classes for Width, Height, Padding, Margin, Text-Align, Font-Style **/\n .wHundred {\n     width: 100%;\n}\n .hHundred {\n     height: 100% \n}\n .pnone-important {\n     padding: 0 !important;\n}\n .p-onerem {\n     padding: 1rem !important;\n}\n .p-oneHalfRem {\n     padding: 1.5rem !important;\n}\n .p-top-oneRem {\n     padding-top: 1rem !important;\n}\n .p-side-oneRem {\n     padding: 0 1rem !important;\n}\n .marginNone {\n     margin: 0 !important;\n}\n .marginBottomChat {\n     margin-bottom: 4rem !important;\n}\n.marginTop {\n\tmargin-top: 1rem !important;\n}\n .tEnd {\n     text-align: end;\n}\n .tStart {\n     text-align: start;\n}\n .fontItalic {\n     font-style: Italic;\n}\n/** Classes for Border, Position, Z-Index, Overflow**/\n .border-secondary-color {\n     border: 1px solid var(--secondary-color);\n}\n .border-third-color {\n     border: 1px solid var(--third-color) !important;\n}\n .border-bottom-secondary-color {\n     border-bottom: 1px solid var(--secondary-color);\n}\n .border-top-secondary-color {\n     border-bottom: 1px solid var(--secondary-color);\n}\n .pFixed {\n     position: fixed;\n}\n .bottomZero {\n     bottom: 0 !important;\n}\n .z-index-high {\n     z-index: 1000;\n}\n .overflow-y-auto {\n     overflow-y: auto;\n}\n #imageSlider, .sliderClass {\n     accent-color: var(--third-color) !important;\n}\n .nextButton:hover, .backButton:hover {\n     background: var(--secondary-color) !important;\n     color: var(--third-color) !important;\n}\n/** CHOOSE WORDS CSS */\n .cloud-label {\n     min-width: 115px !important;\n     display: inline-block;\n     padding: 5px 10px;\n     margin-right: 10px;\n     margin-bottom: 10px;\n     cursor: pointer;\n     background: var(--third-color) !important;\n     color: var(--primary-color) !important;\n     border-radius: 0 !important;\n     border: 1px solid transparent;\n}\n .cloud-label.active {\n     background: var(--primary-color) !important;\n     color: var(--third-color) !important;\n     border: 1px solid var(--secondary-color) !important;\n}\n #feelings-container {\n     display: flex;\n     flex-direction: row;\n     flex-wrap: wrap;\n     justify-content: center;\n}\n/** EMOTION WHEEL CSS */\n text {\n     font-size: 5px;\n     pointer-events: none;\n}\n text:nth-of-type(5),text:nth-of-type(6){\n     transform:rotate(180);\n}\n select {\n     border-radius: 0 !important;\n     padding: 5px !important;\n}\n svg{\n     overflow:visible;\n}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2100,
+                    "y": 0,
+                    "name": "Set CSS"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Standard CSS",
+                        "type": "any",
+                        "label": "Standard CSS"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 84,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "ThemeQuestionObject",
+                "scope": "roundtrip",
+                "value": "{{get(shuffle(toArray(83.Questions)); 1)}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2400,
+                    "y": 0,
+                    "name": "Theme Question Object"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "ThemeQuestionObject",
+                        "type": "any",
+                        "label": "ThemeQuestionObject"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 86,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Theme Question",
+                "scope": "roundtrip",
+                "value": "{{ifempty(if(84.ThemeQuestionObject.value; 84.ThemeQuestionObject; ); get(toArray(83.Questions); 1))}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2700,
+                    "y": 0,
+                    "name": "Theme Question"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Theme Question",
+                        "type": "any",
+                        "label": "Theme Question"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 82,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Theme/Feature Question",
+                "scope": "roundtrip",
+                "value": "{{ifempty(59.Description; )}} {{86.`Theme Question`.value}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3000,
+                    "y": 0,
+                    "name": "Theme/Feature Question"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Theme/Feature Question",
+                        "type": "any",
+                        "label": "Theme/Feature Question"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 89,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "",
+                        "pattern": "chatbot"
+                    },
+                    {
+                        "output": "{{11.DisplayedText}} What emotion does the image trigger in you? Click on the wheel to find opposite emotions.",
+                        "pattern": "emotion"
+                    },
+                    {
+                        "output": "{{11.DisplayedText}} Select the emotions that you feel by looking at the artwork. What emotions are you feeling?",
+                        "pattern": "words"
+                    },
+                    {
+                        "output": "{{ifempty(59.Description; )}} {{11.DisplayedText}}",
+                        "pattern": "slider"
+                    },
+                    {
+                        "output": "{{ifempty(59.Description; )}} {{11.DisplayedText}}",
+                        "pattern": "select"
+                    },
+                    {
+                        "output": "{{82.`Theme/Feature Question`}}",
+                        "pattern": "message"
+                    },
+                    {
+                        "output": "{{ifempty(59.Description; )}} {{11.DisplayedText}}",
+                        "pattern": "yesorno"
+                    }
+                ],
+                "elseOutput": "{{82.`Theme/Feature Question`}}",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3300,
+                    "y": 0,
+                    "name": "Initial Message"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 100,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "let chatText = [\n    \"{{11.Questions.Question1}}\", \"{{11.Questions.Question2}}\", \"{{11.Questions.Question3}}\"\n]",
+                        "pattern": "chatbot"
+                    }
+                ],
+                "elseOutput": "let chatText = [\n    \"{{89.output}}\"\n]",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3600,
+                    "y": 0,
+                    "name": "Chatbot JS"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 77,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "{{102.Emotions}}",
+                        "pattern": "words"
+                    },
+                    {
+                        "output": "{{11.selectWords}}",
+                        "pattern": "select"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3900,
+                    "y": 0,
+                    "name": "Set ChooseWords JS"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 109,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "let selectedYesOrNo = \"{{11.selectWords}}\"\nlet yesOrNo = selectedYesOrNo.split(\"-\");\n\nlet leftButton = document.getElementById(\"LeftYN\");\nlet rightButton = document.getElementById(\"RightYN\");\nlet nbOfYesOrNoLevels = yesOrNo.length;\nlet yesOrNoLevel = 0;\nlet selectedYesOrNoItems = \"\";\n\nfunction submitSelectedABValues() {\n\tleftButton.remove()\n\trightButton.remove();\n\taddChatEntry(selectedYesOrNoItems.replaceAll(\"-\", \", \"));\n    $.ajax({\n        url: 'https://hook.eu1.make.com/g5i3p5du3fvt28x80hy9a13jhldtls6q',\n        type: 'POST',\n        data: {\n            imageKey: imageKey,\n            selectedYesOrNoItems: selectedYesOrNoItems\n        },\n        success: function(response) {\n            console.log('Success:', response);\n\t\t\tlet emotionList = response.split(\";=\")[1].replaceAll(\"-\", \",\");\n\t\t\tdisplayBalken(emotionList);\n\t\t\taddChatbotMessage(\"Thank you for sharing for participating. Below is a bar chart of the selected word from other users.\");\n        },\n        error: function(jqXHR, textStatus, errorThrown) {\n            console.log('Error:', textStatus, errorThrown);\n        }\n    });\n}\n\nfunction yesOrNoClicked(event) {\n    let selectedButton = event.currentTarget.id;\n    selectedYesOrNoItems += event.currentTarget.innerHTML;\n    yesOrNoLevel += 2;\n    if (yesOrNoLevel == nbOfYesOrNoLevels) {\n        // callback\n\t\tsubmitSelectedABValues();\n        return;\n    } else {\n        selectedYesOrNoItems += \"-\";\n        leftButton.innerHTML = yesOrNo[yesOrNoLevel];\n        rightButton.innerHTML = yesOrNo[yesOrNoLevel + 1];\n    }\n}\n\nfunction initializeYesNoButtons() {\n    leftButton.innerHTML = yesOrNo[yesOrNoLevel];\n    rightButton.innerHTML = yesOrNo[yesOrNoLevel + 1];\n    leftButton.addEventListener(\"click\", yesOrNoClicked);\n    rightButton.addEventListener(\"click\", yesOrNoClicked);\n}\n\nif (leftButton) {\n    initializeYesNoButtons();\n}",
+                        "pattern": "yesorno"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 4200,
+                    "y": 0,
+                    "name": "Set YesNoJS"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 111,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "let oppositeEmotions = [\n    [\"{{get(split(11.sliderEmotions[1]; \"-\"); 1)}}\", \"{{get(split(11.sliderEmotions[1]; \"-\"); 2)}}\"],\n    [\"{{get(split(11.sliderEmotions[2]; \"-\"); 1)}}\", \"{{get(split(11.sliderEmotions[2]; \"-\"); 2)}}\"],\n    [\"{{get(split(11.sliderEmotions[3]; \"-\"); 1)}}\", \"{{get(split(11.sliderEmotions[3]; \"-\"); 2)}}\"]\n]\nlet interactionSliders = document.getElementById(\"interactionSliders\");\nlet firstSlider = \"\";\nlet secondSlider = \"\";\nlet thirdSlider = \"\";\nlet submitButtonSliders = \"\";\n\nfunction displayRadarChart(data) {\n    // 1. Parsing Data\n    const records = data.split(',').map(record => record.trim().split('-'));\n\n    let categories = {};\n\n    for (let record of records) {\n        for (let i = 0; i < record.length; i += 3) {\n            const categoryPair = `${record[i]}-${record[i + 1]}`;\n            const value = Number(record[i + 2]);\n            if (categories[categoryPair]) {\n                categories[categoryPair].push(value);\n            } else {\n                categories[categoryPair] = [value];\n            }\n        }\n    }\n\n    // 2. Compute Mean\n    const means = {};\n    for (const [categoryPair, values] of Object.entries(categories)) {\n        const sum = values.reduce((acc, val) => acc + val, 0);\n        const mean = sum / values.length;\n        const [opposite, category] = categoryPair.split('-');\n        means[category] = mean;\n        means[opposite] = 100 - mean;\n    }\n\n    // 3. Arrange labels dynamically\n    const pairs = Object.keys(categories);\n    let firstHalf = pairs.map(pair => pair.split('-')[0]);\n    let secondHalf = pairs.map(pair => pair.split('-')[1]);\n\n    const orderedLabels = [...firstHalf, ...secondHalf];\n\n    // 4. Display Radar Chart\n\n    // Colors\n    const styles = getComputedStyle(document.body);\n    const secondaryColor = styles.getPropertyValue('--secondary-color').trim();\n    const thirdColor = styles.getPropertyValue('--third-color').trim();\n\n    const canvas = document.createElement('canvas');\n    document.getElementById('chatbot').parentNode.appendChild(canvas);\n    const ctx = canvas.getContext('2d');\n\n    new Chart(ctx, {\n        type: 'radar',\n        data: {\n            labels: orderedLabels,\n            datasets: [{\n                label: \"Values\",\n                data: orderedLabels.map(label => means[label]),\n                backgroundColor: thirdColor,\n                borderColor: secondaryColor,\n                pointBackgroundColor: \"white\"\n            }]\n        },\n        options: {\n            scale: {\n                ticks: {\n                    beginAtZero: true,\n                    max: 100,\n                    display: false\n                }\n            }\n        }\n    });\n}\n\nfunction submitSelectedSliders() {\n    let sliderValues = firstSlider.id + \"-\" + firstSlider.value + \"-\";\n    sliderValues += secondSlider.id + \"-\" + secondSlider.value + \"-\";\n    sliderValues += thirdSlider.id + \"-\" + thirdSlider.value;\naddChatEntry(firstSlider.id + \"-\" + firstSlider.value);\n\taddChatEntry(secondSlider.id + \"-\" + secondSlider.value);\n\taddChatEntry(thirdSlider.id + \"-\" + thirdSlider.value);\n    $.ajax({\n        url: 'https://hook.eu1.make.com/zvj44mqnidom5z9p7dda4qb2tng9hvt7',\n        type: 'POST',\n        data: {\n            imageKey: imageKey,\n            sliderValues: sliderValues\n        },\n        success: function(response) {\n            console.log('Success:', response);\n\t\t\tfirstSlider.remove();\n\t\t\tsecondSlider.remove();\n\t\t\tthirdSlider.remove();\n\t\t\tsubmitButtonSliders.remove();\n\t\t\tdocument.getElementById(\"interactionSliders\").remove();\n\t\t\taddChatbotMessage(\"Thank you for sharing. Below you find how other users set the sliders.\")\n\t\t\tdisplayRadarChart(response.split(\";=\")[1]);\n\t\t\t\n        },\n        error: function(jqXHR, textStatus, errorThrown) {\n            console.log('Error:', textStatus, errorThrown);\n        }\n    });\n}\n\nfunction initializeCallbacksForSliders() {\n    firstSlider = document.getElementById(oppositeEmotions[0][0] + \"-\" + oppositeEmotions[0][1]);\n    secondSlider = document.getElementById(oppositeEmotions[1][0] + \"-\" + oppositeEmotions[1][1]);\n    thirdSlider = document.getElementById(oppositeEmotions[2][0] + \"-\" + oppositeEmotions[2][1]);\n    submitButtonSliders = document.getElementById(\"submitButtonSliders\");\n    submitButtonSliders.addEventListener(\"click\", submitSelectedSliders);\n}\n\nif (interactionSliders) {\n    initializeCallbacksForSliders();\n}",
+                        "pattern": "slider"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 4500,
+                    "y": 0,
+                    "name": "Set Slider JS"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 113,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "function secondSelect(emotions){\n\tdeleteUserInputElement();\n\tlet selectedEmotions = emotions;\n\temotions = selectedEmotions.trim().split(\",\");\n\tdisplaySelect(emotions);\n}\n\nfunction secondEmotion(){\n\tdeleteUserInputElement();\n\tdisplayWheel();\n}\n\nfunction secondNone(){\n\t// do nothing\n}\n\nfunction thirdBalken(){\n\tdeleteUserInputElement();\n\tconsole.log(\"Balken\");\n}\n\nfunction thirdWordCloud(enteredComments){\n\tconsole.log(enteredComments);\n\tdisplayWordCloud(enteredComments);\n}\n\nfunction thirdNone(){\n\tdeleteUserInputElement();\n}\n\nfunction successFunctionAjaxComment(response){\n    console.log(\"response:\", response); \n\t\n\tlet customResponse = response.split(\";=\");\n\tlet callback = customResponse[0]\n\tlet data = customResponse[1]\n\n    switch(callback) {\n        case \"secondSelect\":\n            secondSelect(data);\n            break;\n\n        case \"secondEmotion\":\n            secondEmotion(data);\n            break;\n\n        case \"secondNone\":\n            secondNone(data);\n            break;\n\n        case \"thirdBalken\":\n            thirdBalken(data);\n            break;\n\n        case \"thirdWordCloud\":\n            thirdWordCloud(data);\n            break;\n\n        case \"thirdNone\":\n            thirdNone(data);\n            break;\n\n        default:\n            console.log(\"No matching function for response:\", response);\n    }\n}",
+                        "pattern": "chatbot"
+                    },
+                    {
+                        "output": "function successFunctionAjaxComment(enteredComments) {\n\tdisplayWordCloud(enteredComments)\n}",
+                        "pattern": "message"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 4800,
+                    "y": 0,
+                    "name": "Comment Callback"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 123,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "WheelJS",
+                "scope": "roundtrip",
+                "value": "/** START WHEEL */\nlet canvasHolder = $(\"#canvasHolder\");\nlet emotionWheel = $(\"#selectEmotionsId\");\nlet wheel = emotionWheel.find(\"svg\");\nwheel.css(\"width\", `${Math.min(canvasHolder.width()/2, 300)}`);\nwheel.css(\"height\", `${Math.min(canvasHolder.width()/2, 300)}`);\nwheel.css(\"margin-top\", \"3rem\");\nwheel.css(\"margin-bottom\", \"5rem\");\n\nfunction removeWheel() {\n    document.getElementById(\"selectEmotionsId\").style.display = \"none\";\n}\n\nfunction displayWheel() {\n\n    document.getElementById(\"selectEmotionsId\").style.display = \"block\";\n\n    const vars = [\n        [\"Angry\", \"#FF8B94\", [\"Mad\", \"Hurt\", \"Threatened\", \"Distant\"]],\n        [\"Happy\", \"#FFE3B0\", [\"Confused\", \"Startled\", \"Amazed\", \"Excited\"]],\n        [\"Surprised\", \"#FFB291\", [\"Joyful\", \"Proud\", \"Optimistic\", \"Peaceful\"]],\n        [\n            \"Disgusted\",\n            \"#D1EDAA\",\n            [\"Avoidance\", \"Disapproval\", \"Awful\", \"Disapointed\"]\n        ],\n        [\"Sad\", \"#A1DDE6\", [\"Bored\", \"Lonely\", \"Dispair\", \"Guilty\"]],\n        [\"Fearfull\", \"#D9B8E6\", [\"Insecure\", \"Rejected\", \"Anxious\", \"Scared\"]]\n    ];\n    const items = vars.flatMap((item) => item[2]);\n\n    //-----Create Math Variables-----//\n    let r = 0;\n    let R = 45;\n    let R2 = 80;\n    let A = ((360 / vars.length) * Math.PI) / 180;\n    let A2 = ((360 / items.length) * Math.PI) / 180;\n    let d = `M${r * Math.cos(-A / 2)},${r * Math.sin(-A / 2)} L${\n\t  R * Math.cos(-A / 2)\n\t},${R * Math.sin(-A / 2)} A${R},${R} 0 0 1 ${R * Math.cos(A / 2)},${\n\t  R * Math.sin(A / 2)\n\t} L${r * Math.cos(A / 2)},${r * Math.sin(A / 2)} A${r},${r} 0 0 0 ${\n\t  r * Math.cos(-A / 2)\n\t},${r * Math.sin(-A / 2)}`;\n    let d2 = `M${R * Math.cos(-A2 / 2)},${R * Math.sin(-A2 / 2)} L${\n\t  R2 * Math.cos(-A2 / 2)\n\t},${R2 * Math.sin(-A2 / 2)} A${R2},${R2} 0 0 1 ${R2 * Math.cos(A2 / 2)},${\n\t  R2 * Math.sin(A2 / 2)\n\t} L${R * Math.cos(A2 / 2)},${R * Math.sin(A2 / 2)} A${R},${R} 0 0 0 ${\n\t  R * Math.cos(-A2 / 2)\n\t},${R * Math.sin(-A2 / 2)}`;\n    (R2 - R) / 2;\n\n    let textR = r + (R - r) / 2;\n    let textR2 = R + (R2 - R) / 2;\n\n    //-----Create Other Variables-----//\n    let sectorpath = document.getElementById(\"sectorpath\");\n    sectorpath.setAttributeNS(null, \"d\", d);\n    let sectorpath2 = document.getElementById(\"sectorpath2\");\n    sectorpath2.setAttributeNS(null, \"d\", d2);\n\n    //-----Loop Outer Circle-----//\n    var count = 0;\n    for (let i = 0; i < vars.length; i++) {\n        var opacity = 0.5;\n        for (let j = 0; j < vars[i][2].length; j++) {\n            let use = document.createElementNS(\"http://www.w3.org/2000/svg\", \"use\");\n            use.setAttributeNS(\n                \"http://www.w3.org/1999/xlink\",\n                \"xlink:href\",\n                \"#sectorpath2\"\n            );\n            use.setAttributeNS(null, \"fill\", vars[i][1]);\n            use.setAttributeNS(null, \"opacity\", opacity);\n            use.setAttributeNS(\n                null,\n                \"transform\",\n                `rotate(${count * (360 / items.length) - (360 / items.length) * 1.5})`\n            );\n            document.getElementById(\"pies2\").appendChild(use.cloneNode(true));\n            opacity += 0.1;\n            count += 1;\n        }\n    }\n    //-----Loop Outer Labels-----//\n    for (i = 0; i < items.length; i++) {\n        var labelElement = document.createElementNS(\n            \"http://www.w3.org/2000/svg\",\n            \"text\"\n        );\n        let x = 50;\n        let y = 0;\n        labelElement.setAttributeNS(null, \"x\", x);\n        labelElement.setAttributeNS(null, \"y\", y);\n        labelElement.textContent = items[i];\n\n        let sliceAngle = i * (360 / items.length) - (360 / items.length) * 1.5;\n        labelElement.setAttributeNS(null, \"transform\", `rotate(${sliceAngle})`);\n        document.getElementById(\"labels2\").appendChild(labelElement.cloneNode(true));\n    }\n    //-----Loop Inner Circle-----//\n    for (let i = 0; i < vars.length; i++) {\n        let use = document.createElementNS(\"http://www.w3.org/2000/svg\", \"use\");\n        use.setAttributeNS(\n            \"http://www.w3.org/1999/xlink\",\n            \"xlink:href\",\n            \"#sectorpath\"\n        );\n        use.setAttributeNS(null, \"fill\", vars[i][1]);\n        use.setAttributeNS(null, \"transform\", `rotate(${i * (360 / vars.length)})`);\n        document.getElementById(\"pies\").appendChild(use.cloneNode(true));\n    }\n    //-----Loop Inner Labels-----//\n    for (i = 0; i < vars.length; i++) {\n        var labelElement = document.createElementNS(\n            \"http://www.w3.org/2000/svg\",\n            \"text\"\n        );\n        let x = 20;\n        let y = 0;\n        labelElement.setAttributeNS(null, \"x\", x);\n        labelElement.setAttributeNS(null, \"y\", y);\n        labelElement.textContent = vars[i][0];\n\n        let sliceAngle = A * i * (180 / Math.PI);\n        labelElement.setAttributeNS(null, \"transform\", `rotate(${sliceAngle} 0,0)`);\n        document.getElementById(\"labels\").appendChild(labelElement.cloneNode(true));\n    }\n\n    //-----Import and Update Select-----//\n    const select = document.getElementById(\"emotions\");\n    for (let i = 0; i < vars.length; i++) {\n        const groupData = vars[i];\n        const optgroupElement = document.createElement(\"optgroup\");\n        optgroupElement.style = \"background-color:\" + vars[i][1];\n        optgroupElement.label = groupData[0];\n        optgroupElement.setAttribute(\"name\", groupData[0]);\n        for (let j = 0; j < groupData[2].length; j++) {\n            const optionData = groupData[2][j];\n            const optionElement = document.createElement(\"option\");\n            optionElement.textContent = optionData;\n            optionElement.value = optionData;\n            optgroupElement.appendChild(optionElement);\n        }\n        select.appendChild(optgroupElement);\n    }\n\n    var useSlices = document.querySelectorAll(\"#pies2 use\");\n    var texts = document.querySelectorAll(\"#labes2 text\");\n    for (var i = 0; i < useSlices.length; i++) {\n        useSlices[i].addEventListener(\"click\", function() {\n            for (var j = 0; j < useSlices.length; j++) {\n                if (useSlices[j] === this) {\n                    select.selectedIndex = j;\n                    break;\n                }\n            }\n        });\n    }\n\n    var useElements = document.querySelectorAll(\"#pies2 use\");\n    for (var i = 0; i < useElements.length; i++) {\n        useElements[i].style.display = \"none\";\n    }\n    var textElements = document.querySelectorAll(\"#labels2 text\");\n    for (var i = 0; i < textElements.length; i++) {\n        textElements[i].style.display = \"none\";\n    }\n    var useSlicesInner = document.querySelectorAll(\"#pies use\");\n    for (var i = 0; i < useSlicesInner.length; i++) {\n        useSlicesInner[i].addEventListener(\"click\", function() {\n            var useElements = document.querySelectorAll(\"#pies2 use\");\n            for (var i = 0; i < useElements.length; i++) {\n                useElements[i].style.display = \"none\";\n            }\n            var textElements = document.querySelectorAll(\"#labels2 text\");\n            for (var i = 0; i < textElements.length; i++) {\n                textElements[i].style.display = \"none\";\n            }\n            var clickedFillColor = this.getAttribute(\"fill\");\n\n            var outerPieces = document.querySelectorAll(\n                \"#pies2 [fill='\" + clickedFillColor + \"']\"\n            );\n            for (var i = 0; i < outerPieces.length; i++) {\n                outerPieces[i].style.display = \"block\";\n                var rotate = outerPieces[i].getAttribute(\"transform\");\n                document.querySelector(\n                    \"#labels2 text[transform*='\" + rotate + \"']\"\n                ).style.display = \"block\";\n            }\n        });\n    }\n\n\n    function selectedEmotionCallback() {\n        let emotionSelect = document.getElementById(\"emotions\");\n        var emotion = emotionSelect.value;\n        let category = vars.find((element) => element[2].includes(emotion));\n\n        emotionSelect.style.backgroundColor = category[1];\n\n        let selectedCategory = category[0];\n\n        $.ajax({\n            url: 'https://hook.eu1.make.com/srsjwqabk89cxxykhlq2jdhto70eifav',\n            type: 'POST',\n            data: {\n                entryKey: entryKey,\n                imageKey: imageKey,\n                category: selectedCategory,\n                interaction: interaction,\n                emotion: emotion\n            },\n            success: function(response) {\n                console.log('Success:', response);\n                addChatEntry(selectedCategory + \"-\" + emotion);\n                removeWheel();\ndisplayBalken(response.split(\";=\")[1]);\n                if (interaction == \"chatbot\") {\n                    // Do nothing\n                } else {\n                    addChatbotMessage(\"Thank you for sharing.\")\n                }\n                entryKey = response;\n            },\n            error: function(jqXHR, textStatus, errorThrown) {\n                console.log('Error:', textStatus, errorThrown);\n            }\n        });\n    };\n\n    toggleButton = document.createElement('button');\n    toggleButton.className = \"ui button background-color-third nextButton marginTop\";\n    toggleButton.id = \"toggleButton\";\n    toggleButton.innerHTML = \"Submit\";\n    toggleButton.addEventListener('click', selectedEmotionCallback);\n    document.getElementById(\"selectEmotionsId\").appendChild(toggleButton);\n}\n/** END WHEEL */"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 5100,
+                    "y": 0,
+                    "name": "Set WheelJS"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "WheelJS",
+                        "type": "any",
+                        "label": "WheelJS"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 125,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "SelectJs",
+                "scope": "roundtrip",
+                "value": "/** START SELECT **/\nlet selectedEmotions = \"{{77.output}}\";\nlet emotions = selectedEmotions.trim().split(\",\");\n\nfunction displayBalken(response) {\n\n    // Create the canvas element and assign it the id \"myChart\"\n    const canvas = document.createElement('canvas');\n    canvas.id = \"myChart\";\n\n    // Add the class \"p-onerem\" to the canvas\n    canvas.classList.add('p-onerem');\n\n    // Append the canvas to the parent of the \"chatbot\" element\n    const chatbotParent = document.getElementById('chatbot').parentNode;\n    chatbotParent.appendChild(canvas);\n\n\n    const ctx = canvas.getContext('2d');\n\n    // Split the string into an array\n    const wordList = response.split(',').map(word => word.trim());\n\n    // Count occurrences of each word\n    let wordCounts = {};\n    wordList.forEach(word => {\n        wordCounts[word] = wordCounts[word] ? wordCounts[word] + 1 : 1;\n    });\n\n    // Convert the wordCounts object to an array, sort it by count, and slice it for the top 8\n    const sortedWords = Object.entries(wordCounts)\n        .sort((a, b) => b[1] - a[1])\n        .slice(0, 8);\n\n    const words = sortedWords.map(item => item[0]);\n    const counts = sortedWords.map(item => item[1]);\n\n    // Retrieve CSS colors\n    const styles = getComputedStyle(document.body);\n    const secondaryColor = styles.getPropertyValue('--secondary-color').trim();\n    const thirdColor = styles.getPropertyValue('--third-color').trim();\n\n    const backgroundColors = words.map((_, index) => {\n        if (index < 2) return thirdColor;\n        if (index < 5) return secondaryColor;\n        return 'black';\n    });\n\n    const borderColors = words.map(() => secondaryColor);\n\n    new Chart(ctx, {\n        type: 'bar',\n        data: {\n            labels: words,\n            datasets: [{\n                label: 'Count of Words',\n                data: counts,\n                backgroundColor: backgroundColors,\n                borderColor: borderColors,\n                borderWidth: 1\n            }]\n        },\n        options: {\n            scales: {\n                y: {\n                    beginAtZero: true\n                }\n            }\n        }\n    });\n}\n\n\nfunction removeSelect() {\n    document.getElementById(\"selectWordsId\").style.display = \"none\";\n}\n\nfunction displaySelect(emotions) {\n\n    document.getElementById(\"selectWordsId\").style.display = \"block\";\n\n    function shuffleArray(array) {\n        for (let i = array.length - 1; i > 0; i--) {\n            const j = Math.floor(Math.random() * (i + 1));\n            [array[i], array[j]] = [array[j], array[i]];\n        }\n        return array;\n    }\n\n    const shuffledEmotions = shuffleArray(emotions);\n    const feelingsContainer = document.getElementById(\"feelings-container\");\n\n    function updateSelectedWords() {\n        let selectedEmotions = [];\n        for (let emotion of emotions) {\n            if (document.getElementById(emotion).classList.contains(\"active\")) {\n                selectedEmotions.push(emotion);\n            }\n        }\n\n        addChatEntry(selectedEmotions.join(\", \"));\n\n        $.ajax({\n            url: 'https://hook.eu1.make.com/149ynjqc8s385c4ishp6e6fl7ijd1ftd',\n            type: 'POST',\n            data: {\n                entryKey: entryKey,\n                imageKey: imageKey,\n                interaction: interaction,\n                selectedEmotions: selectedEmotions\n            },\n            success: function(response) {\n                console.log('Success:', response);\n                removeSelect();\n                let emotionList = response.split(\";=\")[1];\n\n                if (interaction == \"chatbot\" && chatText[2] != \"\") {\n                    addChatbotMessage();\n                } else {\n                    addChatbotMessage(\"Thank you for participating. Below is a bar chart of the selected options by other users.\");\n                    displayBalken(emotionList);\n                }\n            },\n            error: function(jqXHR, textStatus, errorThrown) {\n                console.log('Error:', textStatus, errorThrown);\n            }\n        });\n    };\n\n    let submitButton = document.getElementById(\"submitSelectedWords\");\n    if (submitButton) {\n        submitButton.addEventListener(\"click\", updateSelectedWords);\n    }\n\n    if (feelingsContainer) {\n        shuffledEmotions.forEach((emotion, index) => {\n            const label = document.createElement(\"label\");\n            label.className = \"cloud-label \" + emotion;\n            label.id = emotion;\n            label.innerHTML = emotion.charAt(0).toUpperCase() + emotion.slice(1);\n            label.addEventListener(\"click\", () => {\n                label.classList.toggle(\"active\");\n            });\n            feelingsContainer.appendChild(label);\n        });\n    }\n}\n\n/** END SELECT */"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 5400,
+                    "y": 0,
+                    "name": "Set SelectJS"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "SelectJs",
+                        "type": "any",
+                        "label": "SelectJs"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 126,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "WordCloud.js",
+                "scope": "roundtrip",
+                "value": "/** START WORD CLOUD */\nfunction displayWordCloud(enteredComments) {\n    deleteUserInputElement();\n\n    // 3. Remove common stopwords (This list is very basic and can be expanded)\n    var stopwords = [\"0o\", \"0s\", \"3a\", \"3b\", \"3d\", \"6b\", \"6o\", \"a\", \"a1\", \"a2\", \"a3\", \"a4\", \"ab\", \"able\", \"about\", \"above\", \"abst\", \"ac\", \"accordance\", \"according\", \"accordingly\", \"across\", \"act\", \"actually\", \"ad\", \"added\", \"adj\", \"ae\", \"af\", \"affected\", \"affecting\", \"affects\", \"after\", \"afterwards\", \"ag\", \"again\", \"against\", \"ah\", \"ain\", \"ain't\", \"aj\", \"al\", \"all\", \"allow\", \"allows\", \"almost\", \"alone\", \"along\", \"already\", \"also\", \"although\", \"always\", \"am\", \"among\", \"amongst\", \"amoungst\", \"amount\", \"an\", \"and\", \"announce\", \"another\", \"any\", \"anybody\", \"anyhow\", \"anymore\", \"anyone\", \"anything\", \"anyway\", \"anyways\", \"anywhere\", \"ao\", \"ap\", \"apart\", \"apparently\", \"appear\", \"appreciate\", \"appropriate\", \"approximately\", \"ar\", \"are\", \"aren\", \"arent\", \"aren't\", \"arise\", \"around\", \"as\", \"a's\", \"aside\", \"ask\", \"asking\", \"associated\", \"at\", \"au\", \"auth\", \"av\", \"available\", \"aw\", \"away\", \"awfully\", \"ax\", \"ay\", \"az\", \"b\", \"b1\", \"b2\", \"b3\", \"ba\", \"back\", \"bc\", \"bd\", \"be\", \"became\", \"because\", \"become\", \"becomes\", \"becoming\", \"been\", \"before\", \"beforehand\", \"begin\", \"beginning\", \"beginnings\", \"begins\", \"behind\", \"being\", \"believe\", \"below\", \"beside\", \"besides\", \"best\", \"better\", \"between\", \"beyond\", \"bi\", \"bill\", \"biol\", \"bj\", \"bk\", \"bl\", \"bn\", \"both\", \"bottom\", \"bp\", \"br\", \"brief\", \"briefly\", \"bs\", \"bt\", \"bu\", \"but\", \"bx\", \"by\", \"c\", \"c1\", \"c2\", \"c3\", \"ca\", \"call\", \"came\", \"can\", \"cannot\", \"cant\", \"can't\", \"cause\", \"causes\", \"cc\", \"cd\", \"ce\", \"certain\", \"certainly\", \"cf\", \"cg\", \"ch\", \"changes\", \"ci\", \"cit\", \"cj\", \"cl\", \"clearly\", \"cm\", \"c'mon\", \"cn\", \"co\", \"com\", \"come\", \"comes\", \"con\", \"concerning\", \"consequently\", \"consider\", \"considering\", \"contain\", \"containing\", \"contains\", \"corresponding\", \"could\", \"couldn\", \"couldnt\", \"couldn't\", \"course\", \"cp\", \"cq\", \"cr\", \"cry\", \"cs\", \"c's\", \"ct\", \"cu\", \"currently\", \"cv\", \"cx\", \"cy\", \"cz\", \"d\", \"d2\", \"da\", \"date\", \"dc\", \"dd\", \"de\", \"definitely\", \"describe\", \"described\", \"despite\", \"detail\", \"df\", \"di\", \"did\", \"didn\", \"didn't\", \"different\", \"dj\", \"dk\", \"dl\", \"do\", \"does\", \"doesn\", \"doesn't\", \"doing\", \"don\", \"done\", \"don't\", \"down\", \"downwards\", \"dp\", \"dr\", \"ds\", \"dt\", \"du\", \"due\", \"during\", \"dx\", \"dy\", \"e\", \"e2\", \"e3\", \"ea\", \"each\", \"ec\", \"ed\", \"edu\", \"ee\", \"ef\", \"effect\", \"eg\", \"ei\", \"eight\", \"eighty\", \"either\", \"ej\", \"el\", \"eleven\", \"else\", \"elsewhere\", \"em\", \"empty\", \"en\", \"end\", \"ending\", \"enough\", \"entirely\", \"eo\", \"ep\", \"eq\", \"er\", \"es\", \"especially\", \"est\", \"et\", \"et-al\", \"etc\", \"eu\", \"ev\", \"even\", \"ever\", \"every\", \"everybody\", \"everyone\", \"everything\", \"everywhere\", \"ex\", \"exactly\", \"example\", \"except\", \"ey\", \"f\", \"f2\", \"fa\", \"far\", \"fc\", \"few\", \"ff\", \"fi\", \"fifteen\", \"fifth\", \"fify\", \"fill\", \"find\", \"fire\", \"first\", \"five\", \"fix\", \"fj\", \"fl\", \"fn\", \"fo\", \"followed\", \"following\", \"follows\", \"for\", \"former\", \"formerly\", \"forth\", \"forty\", \"found\", \"four\", \"fr\", \"from\", \"front\", \"fs\", \"ft\", \"fu\", \"full\", \"further\", \"furthermore\", \"fy\", \"g\", \"ga\", \"gave\", \"ge\", \"get\", \"gets\", \"getting\", \"gi\", \"give\", \"given\", \"gives\", \"giving\", \"gj\", \"gl\", \"go\", \"goes\", \"going\", \"gone\", \"got\", \"gotten\", \"gr\", \"greetings\", \"gs\", \"gy\", \"h\", \"h2\", \"h3\", \"had\", \"hadn\", \"hadn't\", \"happens\", \"hardly\", \"has\", \"hasn\", \"hasnt\", \"hasn't\", \"have\", \"haven\", \"haven't\", \"having\", \"he\", \"hed\", \"he'd\", \"he'll\", \"hello\", \"help\", \"hence\", \"her\", \"here\", \"hereafter\", \"hereby\", \"herein\", \"heres\", \"here's\", \"hereupon\", \"hers\", \"herself\", \"hes\", \"he's\", \"hh\", \"hi\", \"hid\", \"him\", \"himself\", \"his\", \"hither\", \"hj\", \"ho\", \"home\", \"hopefully\", \"how\", \"howbeit\", \"however\", \"how's\", \"hr\", \"hs\", \"http\", \"hu\", \"hundred\", \"hy\", \"i\", \"i2\", \"i3\", \"i4\", \"i6\", \"i7\", \"i8\", \"ia\", \"ib\", \"ibid\", \"ic\", \"id\", \"i'd\", \"ie\", \"if\", \"ig\", \"ignored\", \"ih\", \"ii\", \"ij\", \"il\", \"i'll\", \"im\", \"i'm\", \"immediate\", \"immediately\", \"importance\", \"important\", \"in\", \"inasmuch\", \"inc\", \"indeed\", \"index\", \"indicate\", \"indicated\", \"indicates\", \"information\", \"inner\", \"insofar\", \"instead\", \"interest\", \"into\", \"invention\", \"inward\", \"io\", \"ip\", \"iq\", \"ir\", \"is\", \"isn\", \"isn't\", \"it\", \"itd\", \"it'd\", \"it'll\", \"its\", \"it's\", \"itself\", \"iv\", \"i've\", \"ix\", \"iy\", \"iz\", \"j\", \"jj\", \"jr\", \"js\", \"jt\", \"ju\", \"just\", \"k\", \"ke\", \"keep\", \"keeps\", \"kept\", \"kg\", \"kj\", \"km\", \"know\", \"known\", \"knows\", \"ko\", \"l\", \"l2\", \"la\", \"largely\", \"last\", \"lately\", \"later\", \"latter\", \"latterly\", \"lb\", \"lc\", \"le\", \"least\", \"les\", \"less\", \"lest\", \"let\", \"lets\", \"let's\", \"lf\", \"like\", \"liked\", \"likely\", \"line\", \"little\", \"lj\", \"ll\", \"ll\", \"ln\", \"lo\", \"look\", \"looking\", \"looks\", \"los\", \"lr\", \"ls\", \"lt\", \"ltd\", \"m\", \"m2\", \"ma\", \"made\", \"mainly\", \"make\", \"makes\", \"many\", \"may\", \"maybe\", \"me\", \"mean\", \"means\", \"meantime\", \"meanwhile\", \"merely\", \"mg\", \"might\", \"mightn\", \"mightn't\", \"mill\", \"million\", \"mine\", \"miss\", \"ml\", \"mn\", \"mo\", \"more\", \"moreover\", \"most\", \"mostly\", \"move\", \"mr\", \"mrs\", \"ms\", \"mt\", \"mu\", \"much\", \"mug\", \"must\", \"mustn\", \"mustn't\", \"my\", \"myself\", \"n\", \"n2\", \"na\", \"name\", \"namely\", \"nay\", \"nc\", \"nd\", \"ne\", \"near\", \"nearly\", \"necessarily\", \"necessary\", \"need\", \"needn\", \"needn't\", \"needs\", \"neither\", \"never\", \"nevertheless\", \"new\", \"next\", \"ng\", \"ni\", \"nine\", \"ninety\", \"nj\", \"nl\", \"nn\", \"no\", \"nobody\", \"non\", \"none\", \"nonetheless\", \"noone\", \"nor\", \"normally\", \"nos\", \"not\", \"noted\", \"nothing\", \"novel\", \"now\", \"nowhere\", \"nr\", \"ns\", \"nt\", \"ny\", \"o\", \"oa\", \"ob\", \"obtain\", \"obtained\", \"obviously\", \"oc\", \"od\", \"of\", \"off\", \"often\", \"og\", \"oh\", \"oi\", \"oj\", \"ok\", \"okay\", \"ol\", \"old\", \"om\", \"omitted\", \"on\", \"once\", \"one\", \"ones\", \"only\", \"onto\", \"oo\", \"op\", \"oq\", \"or\", \"ord\", \"os\", \"ot\", \"other\", \"others\", \"otherwise\", \"ou\", \"ought\", \"our\", \"ours\", \"ourselves\", \"out\", \"outside\", \"over\", \"overall\", \"ow\", \"owing\", \"own\", \"ox\", \"oz\", \"p\", \"p1\", \"p2\", \"p3\", \"page\", \"pagecount\", \"pages\", \"par\", \"part\", \"particular\", \"particularly\", \"pas\", \"past\", \"pc\", \"pd\", \"pe\", \"per\", \"perhaps\", \"pf\", \"ph\", \"pi\", \"pj\", \"pk\", \"pl\", \"placed\", \"please\", \"plus\", \"pm\", \"pn\", \"po\", \"poorly\", \"possible\", \"possibly\", \"potentially\", \"pp\", \"pq\", \"pr\", \"predominantly\", \"present\", \"presumably\", \"previously\", \"primarily\", \"probably\", \"promptly\", \"proud\", \"provides\", \"ps\", \"pt\", \"pu\", \"put\", \"py\", \"q\", \"qj\", \"qu\", \"que\", \"quickly\", \"quite\", \"qv\", \"r\", \"r2\", \"ra\", \"ran\", \"rather\", \"rc\", \"rd\", \"re\", \"readily\", \"really\", \"reasonably\", \"recent\", \"recently\", \"ref\", \"refs\", \"regarding\", \"regardless\", \"regards\", \"related\", \"relatively\", \"research\", \"research-articl\", \"respectively\", \"resulted\", \"resulting\", \"results\", \"rf\", \"rh\", \"ri\", \"right\", \"rj\", \"rl\", \"rm\", \"rn\", \"ro\", \"rq\", \"rr\", \"rs\", \"rt\", \"ru\", \"run\", \"rv\", \"ry\", \"s\", \"s2\", \"sa\", \"said\", \"same\", \"saw\", \"say\", \"saying\", \"says\", \"sc\", \"sd\", \"se\", \"sec\", \"second\", \"secondly\", \"section\", \"see\", \"seeing\", \"seem\", \"seemed\", \"seeming\", \"seems\", \"seen\", \"self\", \"selves\", \"sensible\", \"sent\", \"serious\", \"seriously\", \"seven\", \"several\", \"sf\", \"shall\", \"shan\", \"shan't\", \"she\", \"shed\", \"she'd\", \"she'll\", \"shes\", \"she's\", \"should\", \"shouldn\", \"shouldn't\", \"should've\", \"show\", \"showed\", \"shown\", \"showns\", \"shows\", \"si\", \"side\", \"significant\", \"significantly\", \"similar\", \"similarly\", \"since\", \"sincere\", \"six\", \"sixty\", \"sj\", \"sl\", \"slightly\", \"sm\", \"sn\", \"so\", \"some\", \"somebody\", \"somehow\", \"someone\", \"somethan\", \"something\", \"sometime\", \"sometimes\", \"somewhat\", \"somewhere\", \"soon\", \"sorry\", \"sp\", \"specifically\", \"specified\", \"specify\", \"specifying\", \"sq\", \"sr\", \"ss\", \"st\", \"still\", \"stop\", \"strongly\", \"sub\", \"substantially\", \"successfully\", \"such\", \"sufficiently\", \"suggest\", \"sup\", \"sure\", \"sy\", \"system\", \"sz\", \"t\", \"t1\", \"t2\", \"t3\", \"take\", \"taken\", \"taking\", \"tb\", \"tc\", \"td\", \"te\", \"tell\", \"ten\", \"tends\", \"tf\", \"th\", \"than\", \"thank\", \"thanks\", \"thanx\", \"that\", \"that'll\", \"thats\", \"that's\", \"that've\", \"the\", \"their\", \"theirs\", \"them\", \"themselves\", \"then\", \"thence\", \"there\", \"thereafter\", \"thereby\", \"thered\", \"therefore\", \"therein\", \"there'll\", \"thereof\", \"therere\", \"theres\", \"there's\", \"thereto\", \"thereupon\", \"there've\", \"these\", \"they\", \"theyd\", \"they'd\", \"they'll\", \"theyre\", \"they're\", \"they've\", \"thickv\", \"thin\", \"think\", \"third\", \"this\", \"thorough\", \"thoroughly\", \"those\", \"thou\", \"though\", \"thoughh\", \"thousand\", \"three\", \"throug\", \"through\", \"throughout\", \"thru\", \"thus\", \"ti\", \"til\", \"tip\", \"tj\", \"tl\", \"tm\", \"tn\", \"to\", \"together\", \"too\", \"took\", \"top\", \"toward\", \"towards\", \"tp\", \"tq\", \"tr\", \"tried\", \"tries\", \"truly\", \"try\", \"trying\", \"ts\", \"t's\", \"tt\", \"tv\", \"twelve\", \"twenty\", \"twice\", \"two\", \"tx\", \"u\", \"u201d\", \"ue\", \"ui\", \"uj\", \"uk\", \"um\", \"un\", \"under\", \"unfortunately\", \"unless\", \"unlike\", \"unlikely\", \"until\", \"unto\", \"uo\", \"up\", \"upon\", \"ups\", \"ur\", \"us\", \"use\", \"used\", \"useful\", \"usefully\", \"usefulness\", \"uses\", \"using\", \"usually\", \"ut\", \"v\", \"va\", \"value\", \"various\", \"vd\", \"ve\", \"ve\", \"very\", \"via\", \"viz\", \"vj\", \"vo\", \"vol\", \"vols\", \"volumtype\", \"vq\", \"vs\", \"vt\", \"vu\", \"w\", \"wa\", \"want\", \"wants\", \"was\", \"wasn\", \"wasnt\", \"wasn't\", \"way\", \"we\", \"wed\", \"we'd\", \"welcome\", \"well\", \"we'll\", \"well-b\", \"went\", \"were\", \"we're\", \"weren\", \"werent\", \"weren't\", \"we've\", \"what\", \"whatever\", \"what'll\", \"whats\", \"what's\", \"when\", \"whence\", \"whenever\", \"when's\", \"where\", \"whereafter\", \"whereas\", \"whereby\", \"wherein\", \"wheres\", \"where's\", \"whereupon\", \"wherever\", \"whether\", \"which\", \"while\", \"whim\", \"whither\", \"who\", \"whod\", \"whoever\", \"whole\", \"who'll\", \"whom\", \"whomever\", \"whos\", \"who's\", \"whose\", \"why\", \"why's\", \"wi\", \"widely\", \"will\", \"willing\", \"wish\", \"with\", \"within\", \"without\", \"wo\", \"won\", \"wonder\", \"wont\", \"won't\", \"words\", \"world\", \"would\", \"wouldn\", \"wouldnt\", \"wouldn't\", \"www\", \"x\", \"x1\", \"x2\", \"x3\", \"xf\", \"xi\", \"xj\", \"xk\", \"xl\", \"xn\", \"xo\", \"xs\", \"xt\", \"xv\", \"xx\", \"y\", \"y2\", \"yes\", \"yet\", \"yj\", \"yl\", \"you\", \"youd\", \"you'd\", \"you'll\", \"your\", \"youre\", \"you're\", \"yours\", \"yourself\", \"yourselves\", \"you've\", \"yr\", \"ys\", \"yt\", \"z\", \"zero\", \"zi\", \"zz\"];\n\n\n    // Step 1: Remove brackets\n    enteredComments = enteredComments.replace(/^\\[\\s*\"/, '\"').replace(/\"\\s*]$/, '\"');\n\n    // Step 2: Strip all HTML\n    enteredComments = enteredComments.replace(/<[^>]*>/g, '');\n\n    enteredComments = enteredComments.replaceAll('\"', '')\n\n    // Step 3: Convert to array\n    enteredComments = enteredComments.split(',').map(comment => {\n        // Trim whitespace and remove any unwanted characters\n        return comment.trim().replace(/^\"|\"$/g, '');\n    });\n\n    console.log(enteredComments);\n    console.log(enteredComments.length);\n\n    let comments = [];\n    if (enteredComments.length > 30) {\n        addChatbotMessage(\"Thank you for sharing your thoughts. Below you find a word cloud of words that other users shared.\")\n        comments = enteredComments\n    } else {\n        addChatbotMessage(\"Thank you for sharing your interesting thoughts.\")\n        return;\n    }\n\n\n    // Now, you should be able to use d3.layout.cloud() directly\n    let parentElement = document.getElementById(\"content\");\n    let child = parentElement.firstElementChild;\n    let thirdColor = getComputedStyle(document.body).getPropertyValue('--third-color').trim();\n    let secondaryColor = getComputedStyle(document.body).getPropertyValue('--secondary-color').trim();\n\n    let colors = [thirdColor, secondaryColor, \"black\", \"white\"];\n\n    // Create a new SVG element\n    const svgElement = document.createElementNS(\"http://www.w3.org/2000/svg\", \"svg\");\n    svgElement.setAttribute('id', 'wordCloudSVG');\n    svgElement.style.padding = \"2rem\";\n    svgElement.classList.add(\"sixteen\", \"wide\", \"column\");\n\n    // Append the new SVG element to the parent element of 'chatbot'\n    child.appendChild(svgElement);\n\n\n    function expandContractions(text) {\n        const contractionMapping = {\n            \"isn't\": \"is not\",\n            \"aren't\": \"are not\",\n            \"doesn't\": \"does not\",\n            \"didn't\": \"did not\",\n            \"can't\": \"cannot\",\n            \"hasn't\": \"has not\",\n            \"haven't\": \"have not\",\n            \"won't\": \"will not\",\n            \"wasn't\": \"was not\",\n            \"weren't\": \"were not\",\n            \"shan't\": \"shall not\",\n            \"hadn't\": \"had not\",\n            \"don't\": \"do not\",\n            \"wouldn't\": \"would not\",\n            \"couldn't\": \"could not\",\n            \"shouldn't\": \"should not\",\n            \"mightn't\": \"might not\",\n            \"mustn't\": \"must not\"\n        };\n\n        for (const contraction in contractionMapping) {\n            const expansion = contractionMapping[contraction];\n            const regex = new RegExp(contraction, 'g'); // create global regex\n            text = text.replace(regex, expansion);\n        }\n\n        return text;\n    }\n\n    let expandedComments = comments.map(comment => {\n        return expandContractions(comment);\n    });\n\n\n    // 1. Preprocess and Tokenize the Comments\n    function tokenize(expandedComments) {\n        return expandedComments.join(\" \")\n            .toLowerCase()\n            .replace(/[^\\w\\s]/g, '') // Remove punctuation\n            .split(/\\s+/); // Split by whitespace\n    }\n\n    var tokens = tokenize(expandedComments);\n\n    // 2. Word Frequency Count\n    var frequency = tokens.reduce((acc, token) => {\n        acc[token] = (acc[token] || 0) + 1;\n        return acc;\n    }, {});\n\n\n\n    for (let stopword of stopwords) {\n        delete frequency[stopword];\n    }\n\n    function getScaleFactor(screenWidth) {\n        const x1 = 480,\n            y1 = 0.8,\n            x2 = 1024,\n            y2 = 2;\n\n        const m = (y2 - y1) / (x2 - x1);\n        const b = y1 - m * x1;\n\n        let scale = m * screenWidth + b;\n\n        // Limit the scale values\n        if (screenWidth <= x1) scale = y1;\n        if (screenWidth >= x2) scale = y2;\n\n        return scale;\n    }\n\n    const screenWidth = window.innerWidth; // or another method to get screen width\n\n    const scaleFactor = getScaleFactor(screenWidth);\n\n    const baseFontSize = 16; // assuming the browser default is 16px for 1rem\n    const minWordSize = 1 * baseFontSize; // 1rem in pixels\n\n\n\n    // Get top 20 words based on frequency\n    const sortedFrequency = Object.entries(frequency)\n        .sort((a, b) => b[1] - a[1])\n        .slice(0, 25);\n\n    // Create a unique list of frequencies.\n    const uniqueFrequencies = [...new Set(sortedFrequency.map(item => item[1]))];\n\n    const partitionSize = Math.ceil(uniqueFrequencies.length / colors.length);\n\n    const getColorIndex = (freq) => {\n        const position = uniqueFrequencies.indexOf(freq);\n        return Math.floor(position / partitionSize);\n    }\n\n    const topWords = sortedFrequency.map(entry => {\n        const freq = entry[1];\n        const colorIndex = getColorIndex(freq);\n\n        return {\n            text: entry[0],\n            size: minWordSize + (freq * scaleFactor),\n            color: colorIndex // This will be a value between 0 to 3\n        };\n    });\n\n\n\n\n    var layout = d3.layout.cloud()\n        .size([parentElement.clientWidth - 50, (parentElement.clientWidth / 2)])\n        .words(topWords)\n        .padding(5)\n        .rotate(function(d) {\n            if (d.text.length > 4) {\n                return 0;\n            } else {\n                return 90;\n            }\n        })\n        .fontSize(function(d) {\n            return d.size * scaleFactor;\n        })\n        .on(\"end\", draw);\n\n    layout.start();\n\n    function draw(words) {\n        words.forEach(function(d) {\n            // Modify d.x and d.y here as desired.\n            d.y -= 30;\n        });\n        d3.select(\"#wordCloudSVG\")\n            .attr(\"width\", layout.size()[0])\n            .attr(\"height\", layout.size()[1])\n            .append(\"g\")\n            .attr(\"transform\", \"translate(\" + layout.size()[0] / 2 + \",\" + layout.size()[1] / 2 + \")\")\n            .selectAll(\"text\")\n            .data(words)\n            .enter().append(\"text\")\n            .style(\"font-size\", function(d) {\n                return (d.size / baseFontSize) + \"rem\";\n            })\n            .style(\"fill\", function(d) {\n                return colors[d.color]; // Randomly assign color for each word\n            })\n            .attr(\"text-anchor\", \"middle\")\n            .attr(\"transform\", function(d) {\n                return \"translate(\" + [d.x, d.y] + \")rotate(\" + d.rotate + \")\";\n            })\n            .text(function(d) {\n                return d.text;\n            });\n    }\n}\n/** END WORD CLOUD */"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 5700,
+                    "y": 0,
+                    "name": "Set WordCloud JS"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "WordCloud.js",
+                        "type": "any",
+                        "label": "WordCloud.js"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 127,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Application JS",
+                "scope": "roundtrip",
+                "value": "{{100.output}}\nconst imageCanvas = document.getElementById(\"imageCanvas\");\nconst messagesContainer = document.getElementById(\"chatbot\");\nconst content = document.getElementById(\"content\");\nconst ctx = imageCanvas.getContext(\"2d\");\nconst image = new Image();\nlet imageWidth;\nlet imageHeight;\nlet widthOfImage; // for the canvas width\nlet heightOfImage; // fot the canvas height\n\nlet initialMessageDisplayed = false; // for the initial Message\nlet interaction = \"{{11.interaction}}\";\n\nconst inputField = document.getElementById(\"userInput\"); // UserInput Field for messages\nlet imageKey = \"{{1.imageKey}}\"; // for callback of images\n\nimage.src = '{{11.source}}';\nimage.crossOrigin = \"anonymous\";\n\nlet entryKey = \"\"; // ID From stored Data-element\nlet startTime = new Date();\n\n\n/** PLACEHOLDER Functions that can be overwritten */\nfunction drawImageFeatureCallback() {\n    // Can be Overwritten\n}\n\nfunction addChatEntryCallback() {\n    // Can be Overwritten\n}\n\nfunction addChatbotMessageCallback() {\n    // Can be Overwritten\n}\n\nfunction addChatbotMessage() {\n    // Placeholder if function will not be overwritten\n}\n\nfunction initialMessageCallback() {\n    // Can be Overwritten\n}\n\nfunction successFunctionAjaxComment(response) {\n    // Placeholder for Callback of User Comment\n}\n/** END PLACEHOLDERS */\n{{123.WheelJS}}\n{{125.SelectJs}}\nfunction addRequiredHTML() {\n    switch (interaction) {\n        case \"select\":\n            displaySelect(emotions);\n            break;\n\n        case \"words\":\n            displaySelect(emotions);\n            break;\n\n        case \"emotion\":\n            displayWheel();\n            break;\n\n        default:\n            console.log(\"Do nothing\");\n    }\n}\n\naddRequiredHTML();\n\n/** TypeWriter Effect to display Chatbot Message */\n/** Uses these two global variables */\nlet textNumber = 0;\nlet speed = 20;\nlet chatBotMessageInProgress = false; // For the chatbot\nlet chatIdNumber = 0; // The id of the chat\n\nfunction typeWriter(elementId, text) {\n    if (textNumber < text.length) {\n        document.getElementById(elementId).innerHTML += text.charAt(textNumber);\n        textNumber++;\n        setTimeout(typeWriter, speed, elementId, text);\n    } else {\n        textNumber = 0;\n        chatBotMessageInProgress = false;\n    }\n}\n\n/** If a TypeWriter Element is in the document, display Message */\nfunction addMessage() {\n    if (initialMessageDisplayed) {\n        return;\n    }\n    initialMessageDisplayed = true;\n    addChatbotMessage();\n    initialMessageCallback();\n}\n\n\n/** END TYPEWRITER **/\n\n/** AJAX Call for User Comments */\nfunction ajaxCallChatEntry(comment) {\nlet endTime = new Date();\n\tlet timeElapsed = endTime - startTime;\n\tlet questionText = document.getElementById(`botAnswer_${chatIdNumber - 1}`);\n    $.ajax({\n        url: 'https://hook.eu1.make.com/yaqjxyapoistnrte44eq3tdk1z5sah43',\n        type: 'POST',\n        data: {\n            chatIdNumber: chatIdNumber,\n\t\t\t\t\t\ttimeElapsed: timeElapsed,\n\t\t\t\t\t\tquestion: questionText.innerHTML,\n            imageKey: imageKey,\n            comment: comment\n        },\n        success: function(response) {\n            console.log('Success:', response);\n            successFunctionAjaxComment(response);\n        },\n        error: function(jqXHR, textStatus, errorThrown) {\n            console.log('Error:', textStatus, errorThrown);\n        }\n    });\n}\n\n// Draw the splitted view\nfunction drawImage(filter) {\n    imageWidth = image.width;\n    imageHeight = image.height;\n    const containerWidth = imageCanvas.parentNode.offsetWidth;\n    const containerHeight = imageCanvas.parentNode.offsetHeight;\n\n    imageCanvas.width = imageWidth;\n    imageCanvas.height = imageHeight;\n\n    let relation = imageHeight / imageWidth;\n\n    widthOfImage = Math.min(imageWidth, containerWidth);\n    heightOfImage = widthOfImage * relation;\n\n    /* Set the canvas Width and Height dynamically */\n    ctx.canvas.width = widthOfImage;\n    ctx.canvas.height = heightOfImage;\n\n    // Draw the image on the canvas\n    if (filter) {\n        ctx.filter = filter;\n    }\n\n    ctx.drawImage(image, 0, 0, imageWidth, imageHeight, 0, 0, widthOfImage, heightOfImage);\n    ctx.globalCompositeOperation = 'destination-in'\n\n    addMessage();\n    drawImageFeatureCallback();\n}\n\nimage.addEventListener(\"load\", drawImage);\n\n/** JAVASCRIPT FOR CHATBOT */\n\n/** Event Listener, if User writes message*/\nif (inputField) {\n    inputField.addEventListener(\"keydown\", keyDownEventListener);\n    document.getElementById(\"sendMessage\").addEventListener(\"click\", addUserInput);\n}\n\n\nfunction addChatbotMessage(message) {\n    // We need to open the modal first\n    if (!message) {\n        message = chatText[chatIdNumber];\n    }\n    if (!message) {\n        return;\n    };\n    chatBotMessageInProgress = true;\n    let botRow = document.createElement(\"div\");\n    botRow.className = \"row\";\n    let botMessage = document.createElement(\"div\");\n    botMessage.className = \"column tStart fontItalic\";\n    let botText = document.createElement(\"span\");\n    let elemId = \"botAnswer\" + \"_\" + chatIdNumber;\n    botText.id = elemId;\n    chatIdNumber += 1;\n    botText.innerText = '';\n    botMessage.append(botText);\n    botRow.append(botMessage);\n    messagesContainer.append(botRow);\n    typeWriter(elemId, message);\n    addChatbotMessageCallback();\n}\n\n/** The Message from the user is added to the Chat*/\nfunction addChatEntry(input) {\n    let userRow = document.createElement(\"div\");\n    userRow.className = \"row\";\n    let userMessage = document.createElement(\"div\");\n    userMessage.className = \"column tEnd\";\n    let userText = document.createElement(\"span\");\n    userText.innerText = `${input}`;\n    userMessage.append(userText);\n    userRow.append(userMessage);\n    messagesContainer.append(userRow);\n    ajaxCallChatEntry(input);\n    addChatEntryCallback();\n}\n\n/** Function to add user input to chatbot */\nfunction keyDownEventListener(e) {\n    if (e.code === \"Enter\") {\n        addUserInput();\n    }\n}\n\nfunction addUserInput() {\n    if (chatBotMessageInProgress) {\n        return;\n    }\n    let input = inputField.value;\n    if (!input) {\n        return;\n    }\n    inputField.value = \"\";\n    addChatEntry(input);\n    addChatbotMessage();\n}\n\nfunction deleteUserInputElement() {\n    let chatbotElement = document.getElementById(\"chatbot\");\n\n    // Remove next sibling\n    if (chatbotElement.nextElementSibling) {\n        chatbotElement.nextElementSibling.remove();\n    }\n}\n\n/** END CHATBOT **/\n{{126.`WordCloud.js`}}\n{{109.output}}\n{{111.output}}\n{{113.output}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 6000,
+                    "y": 0,
+                    "name": "Set Application JS"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Application JS",
+                        "type": "any",
+                        "label": "Application JS"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 130,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{59.Name}}",
+                "casesTable": [
+                    {
+                        "output": "// Array to hold pieces of the puzzle\nlet pieces = [];\n\n// Height and Width of a piece\nlet pieceWidth;\nlet pieceHeight;\n\n// Number of rows/columns to use for the puzzle\nconst numberOfRows = 3;\nconst numberOfColumns = 5;\n\n// Important Variables for the placement of the pieces while it is dragged (Relative Values)\nlet placementOfXHand;\nlet placementOfYHand;\n\n\nfunction getRelativePlacementToCanvas(event) {\n\tlet canvasRect = imageCanvas.getBoundingClientRect();\n\treturn {\n\t\tx: event.touches[0].clientX - canvasRect.left,\n\t\ty: event.touches[0].clientY - canvasRect.top\n\t};\n}\n\nfunction getMousePos(canvas, evt) {\n\tvar rect = canvas.getBoundingClientRect();\n\treturn {\n\t\tx: evt.clientX - rect.left,\n\t\ty: evt.clientY - rect.top\n\t};\n}\n\nfunction parsePixelValue(value) {\n\treturn Number(value.replace(/px$/, ''))\n}\n\nfunction shuffleArr(array) {\n\tfor (var i = array.length - 1; i > 0; i--) {\n\t\tvar rand = Math.floor(Math.random() * (i + 1));\n\t\t[array[i], array[rand]] = [array[rand], array[i]]\n\t}\n\treturn array;\n}\n\n/**\n * Checks if the puzzle is solved. CurrentX/Y should be equal to set x/y\n */\nfunction puzzleIsSolved() {\n\tfor (let piece of pieces) {\n\t\tif (piece.x != piece.currentX || piece.y != piece.currentY) {\n\t\t\treturn false;\n\t\t}\n\t}\n\treturn true;\n}\n\n/**\n * Removes the pieces and displays the image again\n */\nfunction removeElements() {\n\tfor (let piece of pieces) {\n\t\tdocument.getElementById(piece.id).remove();\n\t}\n\timageCanvas.style.opacity = 1;\n\taddChatbotMessage();\n}\n\n/**\n * Hides the pieces before they are actually removed\n */\nfunction hidePieces() {\n\tfor (let piece of pieces) {\n\t\tdocument.getElementById(piece.id).style.opacity = 0;\n\t}\n\tsetTimeout(removeElements, 1000);\n}\n\n// Function to handle the start of the dragging\nfunction handleDragStart(event) {\n\tevent.dataTransfer.setData('text', event.target.id);\n}\n\nfunction drawImageFeatureCallback() {\n\timageCanvas.style.opacity = 0;\n\n\tpieceWidth = widthOfImage / numberOfRows;\n\tpieceHeight = heightOfImage / numberOfColumns;\n\n\n\t// Create canvas for each piece and add event listeners\n\tlet randomPlacement = [];\n\tfor (let x = 0; x < numberOfRows; x++) {\n\t\tfor (let y = 0; y < numberOfColumns; y++) {\n\t\t\trandomPlacement.push([x, y]);\n\t\t}\n\t}\n\t// Shuffle the random Placements\n\trandomPlacement = shuffleArr(randomPlacement);\n\n\tfor (let x = 0; x < numberOfRows; x++) {\n\t\tfor (let y = 0; y < numberOfColumns; y++) {\n\t\t\tconst pieceCanvas = document.createElement(\"canvas\");\n\n\t\t\t// Style properties of piece canvas\n\t\t\tpieceCanvas.width = pieceWidth;\n\t\t\tpieceCanvas.height = pieceHeight;\n\t\t\tpieceCanvas.style.position = \"absolute\";\n\t\t\tpieceCanvas.style.outline = \"1px solid black\";\n\n\t\t\tlet pos = randomPlacement.shift();\n\t\t\tpieceCanvas.style.left = `${(pos[0]*widthOfImage) / numberOfRows}px`;\n\t\t\tpieceCanvas.style.top = `${(pos[1]*heightOfImage) / numberOfColumns}px`;\n\n\t\t\t// Enable drag and drop\n\t\t\tpieceCanvas.id = numberOfColumns * y + x;\n\t\t\tpieceCanvas.draggable = true;\n\t\t\tpieceCanvas.ondragstart = handleDragStart;\n\t\t\tpieceCanvas.addEventListener('touchstart', handleTouchStart, false);\n\t\t\tpieceCanvas.addEventListener('touchmove', handleTouchMove, false);\n\t\t\tpieceCanvas.addEventListener('touchend', handleTouchEnd, false);\n\n\t\t\tconst pieceContext = pieceCanvas.getContext(\"2d\");\n\n\t\t\t// Draw piece of image onto piece canvas\n\t\t\tpieceContext.drawImage(image, x * (imageWidth / numberOfRows), y * (imageHeight / numberOfColumns), imageWidth / numberOfRows, imageHeight / numberOfColumns, 0, 0, pieceWidth, pieceHeight);\n\n\t\t\t// Push to pieces array\n\t\t\tpieces.push({\n\t\t\t\tid: pieceCanvas.id,\n\t\t\t\tx: x * pieceWidth,\n\t\t\t\ty: y * pieceHeight,\n\t\t\t\tcurrentX: pos[0] * pieceWidth,\n\t\t\t\tcurrentY: pos[1] * pieceHeight\n\t\t\t});\n\n\t\t\t// Append the canvas to the parent of imageCanvas\n\t\t\timageCanvas.parentNode.appendChild(pieceCanvas);\n\t\t}\n\t}\n}\n\nfunction movePieces(mousePosition, draggedId) {\n\n\t// Get corresponding piece object\n\tfor (let piece of pieces) {\n\t\tif (piece.id === draggedId) {\n\t\t\tdraggedPiece = piece;\n\t\t\tbreak;\n\t\t}\n\t}\n\n\t// Check if dropped on another piece\n\tfor (let piece of pieces) {\n\t\tif (piece.id !== draggedId &&\n\t\t\tmousePosition.x > piece.currentX &&\n\t\t\tmousePosition.x < piece.currentX + pieceWidth &&\n\t\t\tmousePosition.y > piece.currentY &&\n\t\t\tmousePosition.y < piece.currentY + pieceHeight) {\n\n\t\t\t// Swap positions\n\t\t\tconst tempX = piece.currentX;\n\t\t\tconst tempY = piece.currentY;\n\t\t\tpiece.currentX = draggedPiece.currentX;\n\t\t\tpiece.currentY = draggedPiece.currentY;\n\t\t\tdraggedPiece.currentX = tempX;\n\t\t\tdraggedPiece.currentY = tempY;\n\n\t\t\t// Update piece positions on screen\n\t\t\tdocument.getElementById(piece.id).style.left = `${piece.currentX}px`;\n\t\t\tdocument.getElementById(piece.id).style.top = `${piece.currentY}px`;\n\t\t\tdocument.getElementById(draggedPiece.id).style.left = `${draggedPiece.currentX}px`;\n\t\t\tdocument.getElementById(draggedPiece.id).style.top = `${draggedPiece.currentY}px`;\n\n\t\t\tif (puzzleIsSolved()) {\n\t\t\t\thidePieces();\n\t\t\t}\n\t\t\treturn;\n\t\t}\n\t}\n}\n\n/**\n * Handle Drop event for Computer\n */\nfunction handleDrop(event) {\n\tevent.preventDefault();\n\tlet mousePosition = getMousePos(imageCanvas, event);\n\n\t// Get id of dragged piece\n\tconst draggedId = event.dataTransfer.getData(\"text\");\n\tlet draggedPiece;\n\n\tmovePieces(mousePosition, draggedId);\n\n}\n\n/**\n * Handlers for the Touch Start/Move\n */\nfunction handleTouchStart(event) {\n\n\tevent.target.setAttribute('data-id', event.target.id);\n\tevent.target.style.zIndex = 1000;\n\n\tlet coordinates = getRelativePlacementToCanvas(event);\n\tplacementOfXHand = coordinates.x - parsePixelValue(event.target.style.left);\n\tplacementOfYHand = coordinates.y - parsePixelValue(event.target.style.top);\n}\n\nfunction handleTouchMove(event) {\n\tevent.preventDefault();\n\n\tlet coordinates = getRelativePlacementToCanvas(event);\n\n\t// New coordinates for the piece to display\n\tlet touchX = coordinates.x - placementOfXHand;\n\tlet touchY = coordinates.y - placementOfYHand;\n\n\tevent.target.style.left = `${touchX}px`;\n\tevent.target.style.top = `${touchY}px`;\n}\n\n/**\n * TouchEndHandler\n */\nfunction handleTouchEnd(event) {\n\n\tevent.target.style.zIndex = 1;\n\tlet draggedId = event.target.getAttribute('data-id');\n\n\tconst canvasRect = imageCanvas.getBoundingClientRect();\n\n\tlet mousePosition = {\n\t\tx: event.changedTouches[0].clientX - canvasRect.left,\n\t\ty: event.changedTouches[0].clientY - canvasRect.top\n\t};\n\n\tmovePieces(mousePosition, draggedId);\n}\n\n// Add event listener for drop event to the parent of imageCanvas\nimageCanvas.parentNode.ondrop = handleDrop;\nimageCanvas.parentNode.ondragover = function(event) {\n\tevent.preventDefault();\n};",
+                        "pattern": "Puzzle"
+                    },
+                    {
+                        "output": "/** Feature Code */\nlet radius = 75; // Adjust the radius of the binoculars view\nconst animationSpeed = 2;\nlet centerX = imageCanvas.width / 2;\nlet centerY = imageCanvas.height / 2;\n\nfunction drawImageFeatureCallback() {\n\t// Apply the clip path to show only a circular portion of the image\n\tctx.beginPath();\n\tctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);\n\tctx.fill();\n}\n\nfunction handleTouchMove(event) {\n\tevent.preventDefault();\n\n\tconst canvasRect = imageCanvas.getBoundingClientRect();\n\tconst touchX = event.touches[0].clientX - canvasRect.left;\n\tconst touchY = event.touches[0].clientY - canvasRect.top;\n\n\tif (touchX >= 0 && touchX <= imageCanvas.width && touchY >= 0 && touchY <= imageCanvas.height) {\n\t\tcenterX = touchX;\n\t\tcenterY = touchY;\n\t} else {\n\t\tcenterX = Math.min(Math.max(touchX, 0), imageCanvas.width);\n\t\tcenterY = Math.min(Math.max(touchY, 0), imageCanvas.height);\n\t}\n\n\tdrawImage();\n};\n\nfunction handleMouseMove(event) {\n\tconst canvasRect = imageCanvas.getBoundingClientRect();\n\tconst mouseX = event.clientX - canvasRect.left;\n\tconst mouseY = event.clientY - canvasRect.top;\n\n\tlet minX = ((imageCanvas.width - imageWidth) / 2) + radius;\n\tlet maxX = ((imageCanvas.width - imageWidth) / 2) + imageWidth - radius;\n\tlet minY = radius;\n\tlet maxY = imageCanvas.height - radius;\n\n\tif (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= maxY) {\n\t\tcenterX = mouseX;\n\t\tcenterY = mouseY;\n\t} else {\n\t\tcenterX = Math.min(Math.max(mouseX, minX), maxX);\n\t\tcenterY = Math.min(Math.max(mouseY, minY), maxY);\n\t}\n\n\tdrawImage();\n}\n\n// Event listener for mouseover canvas\nimageCanvas.addEventListener(\"mousemove\", handleMouseMove);\n\n// Event listener for touchmove on mobile devices\nimageCanvas.addEventListener(\"touchmove\", handleTouchMove);\n\n// Event listener for the click event on the binocularsCanvas\nimageCanvas.addEventListener(\"click\", startAnimation);\n\n// Animation function to gradually increase the radius\nfunction startAnimation() {\n\timageCanvas.removeEventListener(\"mousemove\", handleMouseMove);\n\timageCanvas.removeEventListener(\"touchmove\", handleTouchMove);\n\tlet maxRadius = imageCanvas.width;\n\tlet animationId = requestAnimationFrame(animate);\n\tlet counter = 0;\n\n\tfunction animate() {\n\t\tif (radius < maxRadius) {\n\t\t\tradius += animationSpeed;\n\t\t\tdrawImage();\n\t\t\trequestAnimationFrame(animate);\n\t\t} else {\n\t\t\tcancelAnimationFrame(animationId);\n\t\t\tif (counter == 0) {\n\t\t\t\taddChatbotMessage();\n\t\t\t}\n\t\t\tcounter += 1;\n\t\t}\n\t}\n\n\tanimate();\n}",
+                        "pattern": "Binocular"
+                    },
+                    {
+                        "output": "let splittedWidth;\nlet splittedHeight;\nlet randomPlacement = [];\nlet currentSplittedImageIdx = 0;\nlet imageFeatureInitialized = false;\nlet nextButtonContainer;\nlet nextButton;\n\nfunction shuffleArr(array) {\n\tfor (var i = array.length - 1; i > 0; i--) {\n\t\tvar rand = Math.floor(Math.random() * (i + 1));\n\t\t[array[i], array[rand]] = [array[rand], array[i]]\n\t}\n\treturn array;\n}\n\nfunction drawCurrentSplittedImage() {\n\tif (currentSplittedImageIdx == randomPlacement.length) {\n\t\tnextButtonContainer.remove();\n\t\taddChatbotMessage();\n\t\tdrawImage();\n\t\treturn;\n\t};\n\tlet currentCoords = randomPlacement[currentSplittedImageIdx];\n\tctx.globalCompositeOperation = 'source-over'\n\tctx.drawImage(image, currentCoords[0] * (imageWidth / 2), currentCoords[1] * (imageHeight / 2), imageWidth / 2, imageHeight / 2, splittedWidth / 2, splittedHeight / 2, splittedWidth, splittedHeight);\n\tcurrentSplittedImageIdx += 1;\n};\n\nfunction drawImageFeatureCallback() {\n\tif (imageFeatureInitialized) {\n\t\treturn;\n\t}\n\tsplittedWidth = widthOfImage / 2;\n\tsplittedHeight = heightOfImage / 2;\n\n\t// Create canvas for each piece and add event listeners\n\tfor (let x = 0; x < 2; x++) {\n\t\tfor (let y = 0; y < 2; y++) {\n\t\t\trandomPlacement.push([x, y]);\n\t\t}\n\t}\n\t// Shuffle the random Placements\n\trandomPlacement = shuffleArr(randomPlacement);\n\tctx.clearRect(0, 0, widthOfImage, heightOfImage);\n\tdrawCurrentSplittedImage();\n\n\n\tnextButton = document.createElement('button');\n\tnextButton.className = \"ui button background-color-third nextButton\";\n\tnextButton.innerHTML = \"Next\";\n\tnextButton.addEventListener('click', drawCurrentSplittedImage);\n\n\tnextButtonContainer = document.createElement(\"div\");\n\tnextButtonContainer.appendChild(nextButton);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(nextButtonContainer);\n\timageFeatureInitialized = true;\n}",
+                        "pattern": "Splitted Image"
+                    },
+                    {
+                        "output": "let textCanvas, toggleButton;\nlet transitionDuration = 2000; // Transition duration in milliseconds\nlet transitionIn = false;\n\n// Apply the text mask effect to the \"after\" canvas\nfunction drawImageFeatureCallback() {\n\n\timageCanvas.style.opacity = 0;\n\n\t// Create the \"after\" canvas element\n\ttextCanvas = document.createElement('canvas');\n\n\ttextCanvas.width = imageWidth;\n\ttextCanvas.height = imageHeight;\n\n\tlet textCtx = textCanvas.getContext('2d');\n\n\t/* Set the canvas Width and Height dynamically */\n\ttextCtx.canvas.width = widthOfImage;\n\ttextCtx.canvas.height = heightOfImage;\n\n\ttextCtx.drawImage(image, 0, 0, imageWidth, imageHeight, 0, 0, widthOfImage, heightOfImage);\n\n\t// Apply the text mask effect on the after canvas\n\ttextCtx.globalCompositeOperation = 'destination-in';\n\ttextCtx.font = 'bold 7rem sans-serif';\n\ttextCtx.textAlign = 'center';\n\ttextCtx.textBaseline = 'middle';\n\n\t// Get the size of the text\n\tlet chosenText = '{{11.`Typo-Background`}}'.toUpperCase()\n\tlet textWidth = textCtx.measureText(chosenText).width;\n\n\t// Calculate the position to center the text\n\tlet x = widthOfImage / 2;\n\tlet y = heightOfImage / 2;\n\n\ttextCtx.fillText(chosenText, x, y, widthOfImage);\n\n\t// Hide the \"after\" canvas initially\n\ttextCanvas.style.opacity = 1;\n\ttextCanvas.style.position = \"absolute\";\n\n\t// Create a container for the canvases\n\timageCanvas.parentNode.insertBefore(textCanvas, imageCanvas);\n\n\ttoggleButton = document.createElement('button');\n\ttoggleButton.className = \"ui button background-color-third nextButton\";\n\ttoggleButton.innerHTML = \"Display Image\";\n\ttoggleButton.addEventListener('click', toggleCanvas);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(toggleButton);\n}\n\n// Toggle between \"before\" and \"after\" canvas with transition\nfunction toggleCanvas() {\n\tlet start = null;\n\n\tlet textToDisplay = \"Display \";\n\tif (transitionIn) {\n\t\ttextToDisplay += \"Image\"\n\t} else {\n\t\ttextToDisplay += \"Text\"\n\t}\n\ttoggleButton.textContent = textToDisplay;\n\n\tif (transitionIn) { // Fade in the \"after\" canvas            \n\t\timageCanvas.style.opacity = 0;\n\t\ttextCanvas.style.opacity = 1;\n\t} else { // Fade out the \"after\" canvas            \n\t\timageCanvas.style.opacity = 1;\n\t\ttextCanvas.style.opacity = 0;\n\t}\n\ttransitionIn = !transitionIn;\n\taddChatbotMessage();\n}",
+                        "pattern": "Typo"
+                    },
+                    {
+                        "output": "const sliderOffset = Math.floor(Math.random() * 100);\nlet slidersAreCreated = false;\nlet toggleButton;\n\nconst sliderNames = [{\n\t\tname: 'grayscale',\n\t\tdefaultValue: 0\n\t}, // default value is 0\n\t{\n\t\tname: 'saturate',\n\t\tdefaultValue: 100\n\t}, // default value is 1\n\t{\n\t\tname: 'sepia',\n\t\tdefaultValue: 0\n\t} // default value is 0\n];\n\n// Sets the filter values based on a single slider\nfunction setAllFilterValues() {\n\n\tlet filter = \"\";\n\tlet slider = document.getElementById(`imageSlider`);\n\tsliderNames.forEach(sliderElement => {\n\t\tfilter += `${sliderElement.name}(${(Math.abs(sliderElement.defaultValue + Math.abs(sliderOffset - slider.value))) / 100}) `\n\t});\n\n\tctx.clearRect(0, 0, widthOfImage, heightOfImage);\n\n\tdrawImage(filter);\n}\n\n// Reset the filter values\nfunction resetFilters() {\n\tlet slider = document.getElementById(`imageSlider`);\n\tslider.value = sliderOffset;\n\tsetAllFilterValues();\n\taddChatbotMessage();\n}\n\n// Defines the slider an the toggle Buttons\nfunction drawImageFeatureCallback() {\n\n\tif (slidersAreCreated) {\n\t\treturn;\n\t}\n\n\t// Slider creation\n\n\tlet sliderWrapper = document.createElement('div');\n\tlet slider = document.createElement('input');\n\n\tsliderWrapper.className = 'ui black slider wHundred';\n\tslider.id = `imageSlider`;\n\tslider.className = 'wHundred';\n\n\tslider.type = 'range';\n\tslider.min = 0;\n\tslider.max = 100;\n\tslider.value = Math.random() * 100; // Initial middle value\n\tslider.oninput = function() {\n\t\tsetAllFilterValues();\n\t};\n\n\tsliderWrapper.appendChild(slider);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(sliderWrapper);\n\n\ttoggleButton = document.createElement('button');\n\ttoggleButton.className = \"ui button background-color-third nextButton\";\n\ttoggleButton.innerHTML = \"Reset Image\";\n\ttoggleButton.addEventListener('click', resetFilters);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(toggleButton);\n\n\tslidersAreCreated = true;\n\tsetAllFilterValues();\n}",
+                        "pattern": "Image Sliders"
+                    },
+                    {
+                        "output": "let imageIsDisplayed = true;\nlet buttonsAreCreated = false;\n\nfunction toggleImage() {\n\tif (imageIsDisplayed) {\n\t\timageCanvas.style.opacity = 0;\n\t\tdocument.getElementById('toggleButton').innerHTML = \"Display Image\";\n\t\timageIsDisplayed = false;\n\t} else {\n\t\timageCanvas.style.opacity = 1;\n\t\tdocument.getElementById('toggleButton').innerHTML = \"Hide Image\";\n\t\timageIsDisplayed = true;\n\t}\n};\n\nfunction createButton() {\n\tif (buttonsAreCreated) {\n\t\treturn;\n\t}\n\tlet toggleButton = document.createElement('button');\n\ttoggleButton.className = \"ui button background-color-third nextButton\";\n\ttoggleButton.id = \"toggleButton\";\n\ttoggleButton.innerHTML = \"Display Image\";\n\ttoggleButton.addEventListener('click', toggleImage);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(toggleButton);\n\tbuttonsAreCreated = true;\n}\n\n// Animation function to gradually increase the radius\nfunction startAnimation() {\n\tsetTimeout(function() {\n\t\ttoggleImage();\n\t}, 500);\n\tcreateButton();\n\taddChatbotMessage();\n};\n\nfunction initialMessageCallback() {\n\tsetTimeout(function() {\n\t\tstartAnimation();\n\t}, 10000);\n};",
+                        "pattern": "Time Stop"
+                    },
+                    {
+                        "output": "",
+                        "pattern": "Original"
+                    },
+                    {
+                        "output": "let imageIsUnblurring = false;\nlet blurPx = 100;\n// Sets the filter values based on a single slider\nfunction setBlurValue() {\n\n\tlet filter = `blur(${blurPx}px)`;\n\n\tctx.clearRect(0, 0, widthOfImage, heightOfImage);\n\n\tdrawImage(filter);\n}\n\n\n\n// Defines the slider an the toggle Buttons\nfunction drawImageFeatureCallback() {\n\n\tif (imageIsUnblurring) {\n\t\treturn;\n\t}\n\n\n\timageIsUnblurring = true;\n\tsetBlurValue();\n\n\tlet unblurInterval = setInterval(function() {\n\t\tblurPx -= 1; // Decrease blur value every 10 milliseconds.\n\t\tsetBlurValue();\n\n\t\t// After 10 seconds (10,000 ms), stop unblurring and clear the interval.\n\t\tif (blurPx <= 0) {\n\t\t\tclearInterval(unblurInterval);\n\t\t\tblurPx = 0;\n\t\t\taddChatbotMessage();\n\t\t}\n\t}, 100); // Redraw every 100 milliseconds to achieve 10 second duration from 100px to 0px.\n}",
+                        "pattern": "Blur"
+                    },
+                    {
+                        "output": "let blackAndWhiteIsCreated = false;\nlet colorAdded = true;\nlet toggleButton;\n\n// Reset the filter values\nfunction toggleColors() {\n\tlet filter = \"\";\n\tlet toggleButton = document.getElementById(\"toggleButton\");\n\tif (colorAdded) {\n\t\tfilter = \"grayscale(1)\";\n\t\ttoggleButton.innerHTML = \"Add Colors\";\n\t\tcolorAdded = false;\n\t} else {\n\t\tfilter = \"grayscale(0)\"\n\t\ttoggleButton.innerHTML = \"Remove Colors\";\n\t\tcolorAdded = true;\n\t}\n\n\tctx.clearRect(0, 0, widthOfImage, heightOfImage);\n\n\tdrawImage(filter);\n\taddChatbotMessage();\n}\n\n// Defines the slider an the toggle Buttons\nfunction drawImageFeatureCallback() {\n\n\tif (blackAndWhiteIsCreated) {\n\t\treturn;\n\t}\n\n\t// Slider creation\n\ttoggleButton = document.createElement('button');\n\ttoggleButton.className = \"ui button background-color-third nextButton\";\n\ttoggleButton.id = \"toggleButton\";\n\ttoggleButton.innerHTML = \"Add Colors\";\n\ttoggleButton.addEventListener('click', toggleColors);\n\n\tdocument.getElementById(\"canvasHolder\").appendChild(toggleButton);\n\n\tblackAndWhiteIsCreated = true;\n\ttoggleColors();\n}",
+                        "pattern": "Black and White"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 6300,
+                    "y": 0,
+                    "name": "Set Feature JS"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 131,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "All JAVASCRIPT",
+                "scope": "roundtrip",
+                "value": "window.addEventListener(\"load\", function() {\n\n    {{127.`Application JS`}}\n    {{130.output}}\n});"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 6600,
+                    "y": 0,
+                    "name": "All Javascript"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "All JAVASCRIPT",
+                        "type": "any",
+                        "label": "All JAVASCRIPT"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 115,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Interaction HTML Standard",
+                "scope": "roundtrip",
+                "value": "<div id=\"selectWordsId\">\n<div id=\"feelings-container\"></div>\n<div class=\"p-onerem\">\n  <button class=\"ui secondary button background-color-third border-secondary-color nextButton\" id=\"submitSelectedWords\">\n     Submit\n  </button>\n</div>\n</div>\n<div class=\"p-onerem\" id=\"selectEmotionsId\"><svg viewBox=\"-50 -50 100 100\" id=\"wrap\">\n  <defs>\n    <path id=\"sectorpath\" />\n    <path id=\"sectorpath2\" />\n  </defs>\n\n  \n  <g id=\"pies2\" >\n   \n  </g>\n  \n  <g id=\"pies\" >\n    \n  </g>\n  <g id=\"labels\">\n    \n  </g>\n  <g id=\"labels2\">\n    \n  </g>\n</svg>\n<div class=\"ui one column stackable very relaxed padded grid wHundred\">\n    <div class=\"column pnone-important wHundred\">\n  <select name=\"emotions\" id=\"emotions\" class=\"background-color-third wHundred\"></select>\n    </div>\n  </div>\n</div>"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 6900,
+                    "y": 0,
+                    "name": "General Interaction HTML"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Interaction HTML Standard",
+                        "type": "any",
+                        "label": "Interaction HTML Standard"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 71,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{11.interaction}}",
+                "casesTable": [
+                    {
+                        "output": "<div class=\"ui one column grid marginNone\">\n          <div class=\"column\">\n            <div class=\"ui input wHundred\">\n              <textarea id=\"userInput\" type=\"text\" autocomplete=\"off\" autofocus=\"true\" class=\"wHundred\"></textarea>\n            </div>\n          </div>\n          <div class=\"column\">\n            <div class=\"ui right floated button buttonModal background-color-third nextButton\" id=\"sendMessage\">SEND</div>\n          </div>\n      </div>",
+                        "pattern": "message"
+                    },
+                    {
+                        "output": "<div class=\"ui one column grid marginNone\">\n          <div class=\"column\">\n            <div class=\"ui input wHundred\">\n              <textarea id=\"userInput\" type=\"text\" autocomplete=\"off\" autofocus=\"true\" class=\"wHundred\"></textarea>\n            </div>\n          </div>\n          <div class=\"column\">\n            <div class=\"ui right floated button buttonModal background-color-third nextButton\" id=\"sendMessage\">SEND</div>\n          </div>\n      </div>",
+                        "pattern": "chatbot"
+                    },
+                    {
+                        "output": "<div id=\"interactionSliders\"><div class=\"p-onerem\">\n  <div class=\"ui grid wHundred marginNone\">\n    <div class=\"left aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[1]; \"-\"); 1)}}</div>\n    <div class=\"right aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[1]; \"-\"); 2)}}</div>\n  </div>\n  <div class=\"ui black slider grid wHundred  pnone-important marginNone\">\n    <input id=\"{{get(split(11.sliderEmotions[1]; \"-\"); 1)}}-{{get(split(11.sliderEmotions[1]; \"-\"); 2)}}\" class=\"sliderClass column pnone-important\"type=\"range\" min=\"0\" max=\"100\">\n  </div>\n</div>\n\n<div class=\"p-onerem\">\n  <div class=\"ui grid wHundred marginNone\">\n    <div class=\"left aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[2]; \"-\"); 1)}}</div>\n    <div class=\"right aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[2]; \"-\"); 2)}}</div>\n  </div>\n  <div class=\"ui black slider grid wHundred  pnone-important marginNone\">\n    <input id=\"{{get(split(11.sliderEmotions[2]; \"-\"); 1)}}-{{get(split(11.sliderEmotions[2]; \"-\"); 2)}}\" class=\"sliderClass column pnone-important\"type=\"range\" min=\"0\" max=\"100\">\n  </div>\n</div>\n\n<div class=\"p-onerem\">\n  <div class=\"ui grid wHundred marginNone\">\n    <div class=\"left aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[3]; \"-\"); 1)}}</div>\n    <div class=\"right aligned eight wide column pnone-important\">{{get(split(11.sliderEmotions[3]; \"-\"); 2)}}</div>\n  </div>\n  <div class=\"ui black slider grid wHundred  pnone-important marginNone\">\n    <input id=\"{{get(split(11.sliderEmotions[3]; \"-\"); 1)}}-{{get(split(11.sliderEmotions[3]; \"-\"); 2)}}\" class=\"sliderClass column pnone-important\"type=\"range\" min=\"0\" max=\"100\">\n  </div>\n</div>\n\n<div class=\"p-onerem\">\n  <button class=\"ui secondary button background-color-third nextButton\" id=\"submitButtonSliders\">\n     Submit\n  </button>\n</div>\n</div>",
+                        "pattern": "slider"
+                    },
+                    {
+                        "output": "<div class=\"ui two column grid wHundred p-onerem marginNone\" id=\"buttonContainer\">\n<button class=\"ui secondary button column marginNone background-color-secondary border-third-color yesorno-button\" id=\"LeftYN\">\n</button>\n<button class=\"ui secondary button column marginNone background-color-secondary border-third-color yesorno-button\" id=\"RightYN\">\n</button>\n</div>",
+                        "pattern": "yesorno"
+                    }
+                ],
+                "elseOutput": "",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 7200,
+                    "y": 0,
+                    "name": "SetInteractionHtml"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 117,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{ifempty(11.seriesName; \"none\")}}",
+                "casesTable": [
+                    {
+                        "output": "<em>{{11.Title}},</em> {{11.year}}",
+                        "pattern": "none"
+                    }
+                ],
+                "elseOutput": "<em>{{11.Title}},</em> from the series <em>{{11.seriesName}},</em> {{11.year}}",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 7500,
+                    "y": 0,
+                    "name": "Set Title"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 121,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{1.imageKey}}",
+                "casesTable": [
+                    {
+                        "output": "<em>{{11.Title}},</em> {{11.year}}, from the series <em>{{11.seriesName}}</em> 2018-2022",
+                        "pattern": "a4ac6c8fc761"
+                    },
+                    {
+                        "output": "{{11.Title}}, {{11.year}}",
+                        "pattern": "9fdfec6ef46a"
+                    },
+                    {
+                        "output": "From the series <em>{{11.seriesName}}</em><br><em>{{11.Title}},</em> {{11.year}}",
+                        "pattern": "00070670e50f"
+                    }
+                ],
+                "elseOutput": "{{117.output}}",
+                "useRegExpMatch": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 7800,
+                    "y": 0,
+                    "name": "Set Special Titles"
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "type": "text",
+                                "label": "Pattern"
+                            },
+                            {
+                                "name": "output",
+                                "type": "any",
+                                "label": "Output"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 56,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Button Html",
+                "scope": "roundtrip",
+                "value": "<div class=\"wHundred pFixed bottomZero z-index-high border-top-secondary-color background-color-primary\">\n<div class=\"ui grid marginNone\">\n            <div class=\"eight wide column pnone-important\">\n               <a class=\"ui secondary button backButton wHundred p-onerem background-color-third\" href=\"https://hazu.swiss/{{11.HazuId}}\">Info</a>\n</div>\n<div class=\"eight wide column pnone-important\">\n             <form action=\"https://hook.eu1.make.com/n6izqiyke8ifmf642kr5how1vye3p44m\" class=\"ui form wHundred\" data-hazu-dimmer-selector=\"#dimmer\" data-hazu-hidden-includes=\"parentId,userId,email,displayName\" data-hazu-redirect-url=\"https://hazu.swiss\" id=\"form\" method=\"post\">\n\t<input type=\"hidden\" id=\"imageKey\" name=\"imageKey\" value=\"{{11.NextImageKey}}\">\n\t<button class=\"ui secondary submit button nextButton p-onerem wHundred background-color-third\" name=\"submit\" type=\"submit\">Next</button>\n</form>\n</div>\n      </div>\n</div>"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 8100,
+                    "y": 0,
+                    "name": "Set up HTML Links"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Button Html",
+                        "type": "any",
+                        "label": "Button Html"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 50,
+            "module": "gateway:WebhookRespond",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "body": "<!DOCTYPE html>\n<html lang class=\"k-safari k-safari605 k-mobile\">\n   <head>\n      <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.css\">\n<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n\t\t<script src=\"https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.js\"></script><script src=\"https://www.jasondavies.com/d3.min.js\"></script><script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.7/d3.layout.cloud.min.js\"></script><script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n   </head>\n<meta name=\"viewport\" content=\"width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0\">\n   <body>\n<script>{{131.`All JAVASCRIPT`}}</script>\n      <style>{{51.`Standard CSS`}}\n      </style>\n      <div class=\"ui centered grid border-bottom-secondary-color background-color-primary\">\n         <div class=\"right aligned column\">\n<div class=\"p-onerem\">\n            <h2 class=\"marginNone\">{{11.Artist}}</h2>\n<p>{{121.output}}</p>\n</div>\n         </div>\n      </div>\n     \n      </div>\n      <div id=\"content\" class=\"ui segment pnone-important background-color-primary\">\n         <div class=\"ui equal height stackable very relaxed center aligned padded grid marginBottomChat\">\n               <div class=\"eight wide column pnone-important\" id=\"canvasHolder\">\n                  <canvas id=\"imageCanvas\" class=\"image-canvas border-bottom-secondary-color\"></canvas>\n<div class=\"wHundred\" style=\"margin-bottom: 1rem;\">\n\t<span class=\"wHundred\">©{{11.copyright}}</span>\n</div>\n               </div>\n               <div class=\"eight wide column pnone-important marginBottomChat\">\n                  <div class=\"ui middle aligned internally celled grid marginNone hHundred p-top-oneRem p-side-oneRem\">\n<div class=\"center aligned column pnone-important\"><div class=\"wHundred background-color-primary overflow-y-auto\"><div class=\"ui one column grid marginNone\" id=\"chatbot\"></div>\n                        {{71.output}}\n{{115.`Interaction HTML Standard`}}\n</div>\n</div>\n                  </div>\n            </div>\n         </div>\n      </div>\n{{56.`Button Html`}}\n\n\n\n   </body>\n</html>",
+                "status": "200",
+                "headers": [
+                    {
+                        "key": "content-type",
+                        "value": "text/html"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 8400,
+                    "y": 0,
+                    "name": "Image Experience Page"
+                },
+                "restore": {
+                    "expect": {
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "status",
+                        "type": "uinteger",
+                        "label": "Status",
+                        "required": true,
+                        "validate": {
+                            "min": 100
+                        }
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true,
+                                "validate": {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true,
+                                "validate": {
+                                    "max": 4096
+                                }
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Custom headers",
+                        "validate": {
+                            "maxItems": 16
+                        }
+                    }
+                ],
+                "advanced": true
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com"
+    }
+}
